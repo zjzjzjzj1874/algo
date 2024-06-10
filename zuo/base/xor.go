@@ -30,4 +30,6 @@ func xor() {
 	fmt.Println("m | n = ", m|n) // 1110 = 14
 	fmt.Println("m ^ n = ", m^n) // 1100 = 12
 
+	var z = 10                     // 取出10最低位的1    1010
+	fmt.Println("z & -z = ", z&-z) // 1010 &
 }
