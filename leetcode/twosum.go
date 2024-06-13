@@ -55,6 +55,20 @@ func twosumHash(arr []int, target int) []int {
 }
 
 // 使用Hashmap来实现时间复杂度 < O(N^2)
+func twosumHashV1(arr []int, target int) []int {
+	numMap := make(map[int]int) // map[val][]index => 因为一个数组value相同的元素可能存在多个
+	for idx, val := range arr {
+		if index, ok := numMap[target-val]; ok {
+			return []int{index, idx}
+		}
+
+		numMap[val] = idx
+	}
+
+	return []int{}
+}
+
+// 使用Hashmap来实现时间复杂度 < O(N^2)
 func twosumBubble(arr []int, target int) []int {
 	for i := 0; i < len(arr); i++ {
 		for j := i + 1; j < len(arr); j++ {
