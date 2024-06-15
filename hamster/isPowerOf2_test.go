@@ -1,6 +1,8 @@
 package hamster
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test_isPowerOf2(t *testing.T) {
 	type args struct {
@@ -20,7 +22,7 @@ func Test_isPowerOf2(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := isPowerOf2(tt.args.n); got != tt.want {
+			if got := isPowerOfTwo(tt.args.n); got != tt.want {
 				t.Errorf("isPowerOf2() = %v, want %v", got, tt.want)
 			}
 		})
