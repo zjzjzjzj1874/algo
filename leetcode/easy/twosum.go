@@ -1,4 +1,4 @@
-package leetcode
+package easy
 
 // 针对有序数组的双指针
 func twosumTwoPtr(arr []int, target int) []int {
