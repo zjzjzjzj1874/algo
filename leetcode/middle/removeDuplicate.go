@@ -1,4 +1,4 @@
-package easy
+package middle
 
 // leetcode-80. 删除有序数组中的重复项 II
 // 给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。
