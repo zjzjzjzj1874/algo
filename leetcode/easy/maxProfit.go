@@ -21,20 +21,39 @@ import "math"
 
 // 解题：1、 双指针，最指针找出尽可能小的值，右指针找出尽可能大的值，记录其差值，然后左右移动指针；
 // 移动规则，左边比右边大，则移动左边；否则移动右边
+//
+//	func maxProfit(prices []int) int {
+//		if len(prices) < 2 { // 不足两天，无法完成买卖
+//			return 0
+//		}
+//
+//		min := math.MaxInt
+//		max := 0
+//
+//		for i := 0; i < len(prices); i++ {
+//			if prices[i] < min {
+//				min = prices[i]
+//			} else {
+//				if prices[i]-min > max {
+//					max = prices[i] - min
+//				}
+//			}
+//		}
+//
+//		return max
+//	}
 func maxProfit(prices []int) int {
-	if len(prices) < 2 { // 不足两天，无法完成买卖
-		return 0
-	}
+	var (
+		min = math.MaxInt
+		max = 0
+	)
 
-	min := math.MaxInt
-	max := 0
-
-	for i := 0; i < len(prices); i++ {
-		if prices[i] < min {
-			min = prices[i]
+	for _, p := range prices {
+		if min > p {
+			min = p
 		} else {
-			if prices[i]-min > max {
-				max = prices[i] - min
+			if max < p-min {
+				max = p - min
 			}
 		}
 	}

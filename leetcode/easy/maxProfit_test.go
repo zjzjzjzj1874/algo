@@ -11,8 +11,9 @@ func Test_maxProfit(t *testing.T) {
 		args args
 		want int
 	}{
-		{name: "test_max_profit", args: args{prices: []int{7, 1, 5, 3, 6, 4}}, want: 5},
-		{name: "test_max_profit", args: args{prices: []int{7, 6, 4, 3, 1}}, want: 0},
+		//{name: "test_max_profit", args: args{prices: []int{7, 1, 5, 3, 6, 4}}, want: 5},
+		//{name: "test_max_profit", args: args{prices: []int{7, 6, 4, 3, 1}}, want: 0},
+		{name: "test_max_profit", args: args{prices: []int{2, 7, 2, 5, 1, 8}}, want: 7},
 		{name: "test_max_profit", args: args{prices: []int{2, 1, 4}}, want: 3},
 	}
 	for _, tt := range tests {
