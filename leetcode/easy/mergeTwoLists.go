@@ -24,48 +24,73 @@ package easy
  * }
  */
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
-	ans := &ListNode{}
+	ans := &ListNode{} // 一个空头节点
 	cur := ans
 
 	for list1 != nil && list2 != nil {
-		if list1.Val > list2.Val {
-			cur.Next = list2
-			list2 = list2.Next
-		} else {
+		if list1.Val < list2.Val {
 			cur.Next = list1
 			list1 = list1.Next
+		} else {
+			cur.Next = list2
+			list2 = list2.Next
 		}
 		cur = cur.Next
 	}
 
-	for list1 != nil {
+	if list1 != nil {
 		cur.Next = list1
 	}
-
-	for list2 != nil {
+	if list2 != nil {
 		cur.Next = list2
 	}
 
 	return ans.Next
-
-	//	dummy := &ListNode{} // 用哨兵节点简化代码逻辑
-	//    cur := dummy // cur 指向新链表的末尾
-	//    for list1 != nil && list2 != nil {
-	//        if list1.Val < list2.Val {
-	//            cur.Next = list1 // 把 list1 加到新链表中
-	//            list1 = list1.Next
-	//        } else { // 注：相等的情况加哪个节点都是可以的
-	//            cur.Next = list2 // 把 list2 加到新链表中
-	//            list2 = list2.Next
-	//        }
-	//        cur = cur.Next
-	//    }
-	//    // 拼接剩余链表
-	//    if list1 != nil {
-	//        cur.Next = list1
-	//    } else {
-	//        cur.Next = list2
-	//    }
-	//    return dummy.Next
-	//
 }
+
+//func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
+//	ans := &ListNode{}
+//	cur := ans
+//
+//	for list1 != nil && list2 != nil {
+//		if list1.Val > list2.Val {
+//			cur.Next = list2
+//			list2 = list2.Next
+//		} else {
+//			cur.Next = list1
+//			list1 = list1.Next
+//		}
+//		cur = cur.Next
+//	}
+//
+//	for list1 != nil {
+//		cur.Next = list1
+//	}
+//
+//	for list2 != nil {
+//		cur.Next = list2
+//	}
+//
+//	return ans.Next
+//
+//	//	dummy := &ListNode{} // 用哨兵节点简化代码逻辑
+//	//    cur := dummy // cur 指向新链表的末尾
+//	//    for list1 != nil && list2 != nil {
+//	//        if list1.Val < list2.Val {
+//	//            cur.Next = list1 // 把 list1 加到新链表中
+//	//            list1 = list1.Next
+//	//        } else { // 注：相等的情况加哪个节点都是可以的
+//	//            cur.Next = list2 // 把 list2 加到新链表中
+//	//            list2 = list2.Next
+//	//        }
+//	//        cur = cur.Next
+//	//    }
+//	//    // 拼接剩余链表
+//	//    if list1 != nil {
+//	//        cur.Next = list1
+//	//    } else {
+//	//        cur.Next = list2
+//	//    }
+//	//    return dummy.Next
+//	//
+//}
