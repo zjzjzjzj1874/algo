@@ -44,3 +44,20 @@ func isPalindrome(head *ListNode) bool {
 }
 
 // TODO O(1)复杂度的算法：使用快慢指针，1.找到一半长度的链表；2.反转后半部分的链表；3.比较前后段部分是否相同，返回结果
+
+// 解题：进阶 =》快慢指针
+func isPalindromeFastSlow(head *ListNode) bool {
+	if head == nil || head.Next == nil {
+		return true
+	}
+
+	fast := head
+	slow := head
+	for fast.Next != nil && fast.Next.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+	}
+	// 这里慢指针走到一半了，快指针走完了
+
+	return true
+}
