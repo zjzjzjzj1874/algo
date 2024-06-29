@@ -18,20 +18,36 @@ package easy
 
 // 解题：需要使用一个中间变量缓存next的指针
 func reverseList(head *ListNode) *ListNode {
-	if head == nil {
-		return nil
-	}
+	var dummy *ListNode
 
-	var ans *ListNode
 	cur := head
-
 	for cur != nil {
 		next := cur.Next
-		cur.Next = ans
 
-		ans = cur
+		cur.Next = dummy
+		dummy = cur
+
 		cur = next
 	}
 
-	return ans
+	return dummy
 }
+
+//func reverseList(head *ListNode) *ListNode {
+//	if head == nil {
+//		return nil
+//	}
+//
+//	var ans *ListNode
+//	cur := head
+//
+//	for cur != nil {
+//		next := cur.Next
+//		cur.Next = ans
+//
+//		ans = cur
+//		cur = next
+//	}
+//
+//	return ans
+//}
