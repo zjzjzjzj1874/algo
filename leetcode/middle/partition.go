@@ -23,7 +23,7 @@ package middle
  */
 
 // 解题：使用4个空指针，大于等于区首尾，小于区首尾，遍历后归属，整合
-func partition(head *ListNode, x int) *ListNode {
+func partition4th(head *ListNode, x int) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
@@ -81,4 +81,33 @@ func partition(head *ListNode, x int) *ListNode {
 	lt.Next = gteh
 
 	return lh
+}
+
+// 解题：2个指针，一个大于等于，一个小于，最后拼起来
+func partition(head *ListNode, x int) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	var (
+		less = &ListNode{}
+		gte  = &ListNode{}
+		lh   = less // lh:less head
+		gteh = gte  // gteh:greater or equal head
+	)
+
+	cur := head
+	for cur != nil {
+		if cur.Val >= x {
+			gte.Next = cur
+			gte = gte.Next
+		} else {
+			less.Next = cur
+			less = less.Next
+		}
+		cur = cur.Next
+	}
+	gte.Next = nil        // 掐断大于等于尾部
+	less.Next = gteh.Next // 大于小于区合并
+	return lh.Next
 }
