@@ -73,4 +73,49 @@ func getIntersectionNode(headA, headB *ListNode) *ListNode {
 	return nil
 }
 
-// TODO 进阶：如何使用指针能把相交节点求出来？？？
+// 解题：headA和headB都遍历一次，headA的终点endA，长度la，headB的终点endB，长度lb；
+// 如果endA == endB，说明两节点相交，否则不相交；
+// 相交时，假设la更长，先让更长的节点先走la-lb步，然后两个节点同时走，一定会在某个时候相交，返回相交节点即可
+func getIntersectionNodeO1(headA, headB *ListNode) *ListNode {
+	if headA == nil || headB == nil {
+		return nil
+	}
+
+	endA, endB := headA, headB
+	la, lb := 1, 1
+
+	for endA.Next != nil {
+		endA = endA.Next
+		la++
+	}
+	for endB.Next != nil {
+		endB = endB.Next
+		lb++
+	}
+
+	if endA != endB { // 不相交
+		return nil
+	}
+
+	endA, endB = headA, headB
+	// 以下相交
+	// case1. la>lb：链表A长，A先走la-lb步
+	if la > lb {
+		for i := 0; i < la-lb; i++ {
+			endA = endA.Next
+		}
+	}
+	// case2. lb>la：链表B长，B先走lb-la步
+	if lb > la {
+		for i := 0; i < lb-la; i++ {
+			endB = endB.Next
+		}
+	}
+	// case3. la=lb：两链表等长，不用谁先走 => 上面也做成了这种case
+	for endA != endB {
+		endA = endA.Next
+		endB = endB.Next
+	}
+
+	return endA
+}
