@@ -28,7 +28,12 @@ package linkedList
  * }
  */
 
-// 解题：
+// 解题：left==right时不需要翻转；
+// 1. 先使用哨兵节点记录；然后使用p0记录反转前的节点；
+// 2. p0先移动到left的前一个节点(因为有哨兵节点，来到的是前一个，而非本身)；
+// 3. 申明一个pre变量，用来记录left-right之间的翻转之后的值；
+// 4. cur是head剩下的节点，至此，head被分成三部分，p0是最前面的一部分，pre是翻转的一部分，cur是剩下的一部分；
+// 5. 按照先后顺序依次组装即可。
 func reverseBetween(head *ListNode, left int, right int) *ListNode {
 	if head == nil || left == right {
 		return head
