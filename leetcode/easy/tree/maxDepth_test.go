@@ -1,6 +1,8 @@
-package easy
+package tree
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test_maxDepth(t *testing.T) {
 	type args struct {

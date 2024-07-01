@@ -1,4 +1,6 @@
-package easy
+package tree
+
+import "container/list"
 
 // 145. 二叉树的后序遍历
 // 给你二叉树的根节点 root ，返回它节点值的 后序 遍历。
@@ -39,6 +41,38 @@ func postorderTraversal(root *TreeNode) []int {
 	}
 
 	postorder(root)
+
+	return ans
+}
+
+func postorderTraversalStack(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+
+	ans := make([]int, 0, 4)
+	stack := list.New()
+	stack.PushBack(root)
+
+	for stack.Len() > 0 {
+		e := stack.Back()
+		stack.Remove(e)
+
+		root = e.Value.(*TreeNode)
+		ans = append(ans, root.Val)
+
+		if root.Left != nil {
+			stack.PushBack(root.Left)
+		}
+		if root.Right != nil {
+			stack.PushBack(root.Right)
+		}
+	}
+
+	n := len(ans) // 交换顺序
+	for i := 0; i < n/2; i++ {
+		ans[i], ans[n-1-i] = ans[n-1-i], ans[i]
+	}
 
 	return ans
 }

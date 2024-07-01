@@ -1,4 +1,6 @@
-package easy
+package tree
+
+import "container/list"
 
 // 94. 二叉树的中序遍历
 // 给定一个二叉树的根节点 root ，返回 它的 中序 遍历 。
@@ -41,13 +43,36 @@ func inorderTraversal(root *TreeNode) []int {
 	return ans
 }
 
-func inorderTraversalWithAns(root *TreeNode, ans []int) []int {
+// 解题：迭代
+// 中序遍历打印顺序：左头右，使用左树分解整棵树，则压栈顺序是左右左右左右。。。
+// 每根子树的整棵树左边界进栈，一次弹出的过程中，打印处理，对弹出节点的右树重复；
+func inorderTraversalWithStack(root *TreeNode) []int {
 	if root == nil {
 		return []int{}
 	}
+	ans := make([]int, 0, 4)
+	stack := list.New()
+	cur := root
+	// 1.把所有左树压入栈
+	for cur != nil {
+		stack.PushBack(cur)
+		cur = cur.Left
+	}
 
-	inorderTraversalWithAns(root.Left, ans)
-	ans = append(ans, root.Val)
-	inorderTraversalWithAns(root.Right, ans)
+	// 2. 依次弹出，然后打印
+	for stack.Len() > 0 {
+		e := stack.Back()
+		stack.Remove(e)
+		cur := e.Value.(*TreeNode)
+		ans = append(ans, cur.Val)
+
+		cur = cur.Right
+		// 3.对右树重复，先把所有左树放入
+		for cur != nil {
+			stack.PushBack(cur)
+			cur = cur.Left
+		}
+	}
+
 	return ans
 }
