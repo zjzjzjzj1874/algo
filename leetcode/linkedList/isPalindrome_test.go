@@ -1,6 +1,8 @@
-package easy
+package linkedList
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test_isPalindrome(t *testing.T) {
 	type args struct {

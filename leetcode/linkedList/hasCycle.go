@@ -1,4 +1,4 @@
-package easy
+package linkedList
 
 // 141. 环形链表
 // 给你一个链表的头节点 head ，判断链表中是否有环。

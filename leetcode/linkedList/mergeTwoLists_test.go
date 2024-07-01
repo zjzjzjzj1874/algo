@@ -1,4 +1,4 @@
-package easy
+package linkedList
 
 import (
 	"reflect"
