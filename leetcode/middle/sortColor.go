@@ -32,13 +32,13 @@ import "fmt"
 func sortColors(nums []int) {
 	l := -1
 	r := len(nums)
-
-	for i := 0; i < r; {
-		if nums[i] < 0 {
-			nums[i+1], nums[i] = nums[i], nums[i+1]
+	i := 0
+	for i < r {
+		if nums[i] < 1 {
+			nums[l+1], nums[i] = nums[i], nums[l+1]
 			i++
 			l++
-		} else if nums[i] == 0 {
+		} else if nums[i] == 1 {
 			i++
 		} else {
 			nums[r-1], nums[i] = nums[i], nums[r-1]
