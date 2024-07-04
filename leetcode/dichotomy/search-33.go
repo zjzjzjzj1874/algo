@@ -1,4 +1,4 @@
-package middle
+package dichotomy
 
 // 33. 搜索旋转排序数组
 // 整数数组 nums 按升序排列，数组中的值 互不相同 。
@@ -30,29 +30,31 @@ package middle
 // 题目数据保证 nums 在预先未知的某个下标上进行了旋转
 // -104 <= target <= 104
 
-// 解题：二分法，在一部分上是有序的
-func search(nums []int, target int) int {
+// 解题：二分法，在一部分上是有序的  => 左闭右开
+func search33(nums []int, target int) int {
 	n := len(nums)
+	l := 0
+	r := n - 1
 
-	l, r := 0, n-1
 	for l <= r {
 		mid := (l + r) / 2
-		if nums[mid] == target { // 找到目标值
+
+		if nums[mid] == target {
 			return mid
 		}
 
-		if nums[mid] <= nums[r] { // 右边有序
-			if nums[mid] <= target && target <= nums[r] {
-				l = mid + 1
-			} else {
+		if nums[0] <= nums[mid] { // 左边有序
+			if nums[l] <= target && nums[mid] >= target {
 				r = mid - 1
+			} else {
+				l = mid + 1
 			}
 		} else {
-			// 左边有序
-			if nums[l] <= target && target <= nums[mid] {
-				r = mid - 1
-			} else {
+			// 右边有序
+			if nums[mid] <= target && nums[r] >= target {
 				l = mid + 1
+			} else {
+				r = mid - 1
 			}
 		}
 	}
