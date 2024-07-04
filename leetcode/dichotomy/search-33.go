@@ -30,7 +30,7 @@ package dichotomy
 // 题目数据保证 nums 在预先未知的某个下标上进行了旋转
 // -104 <= target <= 104
 
-// 解题：二分法，在一部分上是有序的  => 左闭右开
+// 解题：二分法，在一部分上是有序的  双闭区间
 func search33(nums []int, target int) int {
 	n := len(nums)
 	l := 0

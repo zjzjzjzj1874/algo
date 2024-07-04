@@ -20,7 +20,7 @@ package dichotomy
 // n 将在 [1, 10000]之间。
 // nums 的每个元素都将在 [-9999, 9999]之间。
 
-// 解题：二分法
+// 解题：二分法  双开区间
 func search(nums []int, target int) int {
 	n := len(nums)
 
