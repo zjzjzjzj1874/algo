@@ -15,6 +15,7 @@ func Test_isValid(t *testing.T) {
 		{name: "isValid", args: args{s: "(]"}, want: false},
 		{name: "isValid", args: args{s: "()[]{}"}, want: true},
 		{name: "isValid", args: args{s: "()"}, want: true},
+		{name: "isValid", args: args{s: "([{}])"}, want: true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
