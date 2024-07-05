@@ -24,6 +24,7 @@ func findDuplicates(nums []int) []int {
 
 	for i := 0; i < n; i++ {
 		for nums[i] != nums[nums[i]-1] {
+			// 举例：如果i=0 nums = []int{2,3,5,4} ，则nums[0] = 2,nums[nums[i]-1]表示2该出现的位置不是2，则进行交换
 			nums[i], nums[nums[i]-1] = nums[nums[i]-1], nums[i]
 		}
 	}
