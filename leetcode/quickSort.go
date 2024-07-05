@@ -2,7 +2,7 @@ package leetcode
 
 import "fmt"
 
-func quickSort(nums []int) {
+func QuickSort(nums []int) {
 	if len(nums) <= 1 {
 		return
 	}

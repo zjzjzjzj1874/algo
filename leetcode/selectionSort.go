@@ -2,8 +2,8 @@ package leetcode
 
 import "fmt"
 
-// 选择排序
-func selectionSort(nums []int) {
+// SelectionSort 选择排序
+func SelectionSort(nums []int) {
 	fmt.Println("排序前：", nums)
 	for i := 0; i < len(nums); i++ {
 		minIdx := i // 最小数的下标
