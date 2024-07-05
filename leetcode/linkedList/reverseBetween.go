@@ -60,3 +60,32 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
 	p0.Next = pre
 	return dummy.Next
 }
+
+func reverseBetweenV1(head *ListNode, left int, right int) *ListNode {
+	if head == nil || left == right {
+		return head
+	}
+
+	dummy := &ListNode{Next: head} // 哨兵节点
+
+	p0 := dummy
+	for i := 0; i < left-1; i++ {
+		p0 = p0.Next
+	}
+
+	cur := p0.Next
+	var pre *ListNode
+
+	for i := 0; i <= right-left; i++ {
+		next := cur.Next
+		cur.Next = pre
+		pre = cur
+		cur = next
+	} // left-right翻转完成
+
+	p0.Next.Next = cur
+	p0.Next = pre
+
+	return dummy.Next
+
+}

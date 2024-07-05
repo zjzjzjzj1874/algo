@@ -51,3 +51,42 @@ func hasCycle(head *ListNode) bool {
 
 	return false
 }
+
+// 解题：Hash表来存储，有的话就有重复
+func hasCycleHash(head *ListNode) bool {
+	if head == nil || head.Next == nil {
+		return false
+	}
+
+	cycleMap := make(map[*ListNode]struct{})
+	cur := head
+	for cur != nil {
+		_, ok := cycleMap[cur]
+		if ok {
+			return true
+		}
+		cycleMap[cur] = struct{}{}
+		cur = cur.Next
+	}
+
+	return false
+}
+
+func hasCyclePtr(head *ListNode) bool {
+	if head == nil || head.Next == nil {
+		return false
+	}
+
+	cur := head
+	fast := cur.Next.Next
+	slow := cur.Next
+	for fast != nil && fast.Next != nil {
+		if fast == slow {
+			return true
+		}
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+
+	return false
+}
