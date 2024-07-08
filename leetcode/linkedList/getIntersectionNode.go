@@ -95,17 +95,26 @@ func getIntersectionNodeO1(headA, headB *ListNode) *ListNode {
 	endA, endB = headA, headB
 	// 以下相交
 	// case1. la>lb：链表A长，A先走la-lb步
-	if la > lb {
-		for i := 0; i < la-lb; i++ {
-			endA = endA.Next
-		}
+	for la > lb {
+		endA = endA.Next
+		la--
 	}
+	//if la > lb {
+	//	for i := 0; i < la-lb; i++ {
+	//		endA = endA.Next
+	//	}
+	//}
 	// case2. lb>la：链表B长，B先走lb-la步
-	if lb > la {
-		for i := 0; i < lb-la; i++ {
-			endB = endB.Next
-		}
+	for lb > la {
+		endB = endB.Next
+		lb--
 	}
+	//if lb > la {
+	//	for i := 0; i < lb-la; i++ {
+	//		endB = endB.Next
+	//	}
+	//}
+
 	// case3. la=lb：两链表等长，不用谁先走 => 上面也做成了这种case
 	for endA != endB {
 		endA = endA.Next
@@ -113,4 +122,26 @@ func getIntersectionNodeO1(headA, headB *ListNode) *ListNode {
 	}
 
 	return endA
+}
+
+func getIntersectionNodeO12Ptr(headA, headB *ListNode) *ListNode {
+	if headA == nil || headB == nil {
+		return nil
+	}
+
+	pa, pb := headA, headB
+	for pa != pb {
+		if pa == nil {
+			pa = headB
+		} else {
+			pa = pa.Next
+		}
+		if pb == nil {
+			pb = headA
+		} else {
+			pb = pb.Next
+		}
+	}
+
+	return pa
 }
