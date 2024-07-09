@@ -16,7 +16,7 @@ package easy
 // 进阶：尝试设计时间复杂度为 O(n)、空间复杂度为 O(1) 的算法解决此问题。
 
 // leetcode的解题思路：1. 相消法，任意两个不相同的元素，同时消失，最后剩余的最多的元素一定是满足题意的。 2. 哈希值法
-func majorityElement(nums []int) int {
+func majoritElement(nums []int) int {
 	res := nums[0]
 	majorTimes := 1
 	for i := 1; i < len(nums); i++ {
@@ -32,4 +32,51 @@ func majorityElement(nums []int) int {
 		}
 	}
 	return res
+}
+
+func majoritElementWithMore(nums []int) int {
+	ele := 0
+	vote := 0
+	for i := range nums {
+		if ele == 0 && vote == 0 { // 第一次来，没有元素也没有投票信息
+			ele = nums[i]
+			vote++
+		} else if ele != 0 && vote == 0 { // 投票被相消了，但是ele是消除的元素
+			vote++
+			ele = nums[i]
+		} else if nums[i] == ele { // 不相同且投票信息不为0
+			vote++
+		} else {
+			vote--
+		}
+	}
+
+	check := 0
+	for i := range nums {
+		if nums[i] == ele {
+			check++
+		}
+	}
+
+	if check > len(nums)/2 && vote > 0 {
+		return ele
+	} else {
+		return -1
+	}
+}
+func majoritElementWithMoreV1(nums []int) int {
+	ele := 0
+	vote := 0
+	for i := range nums {
+		if vote == 0 {
+			ele = nums[i]
+		}
+		if nums[i] == ele {
+			vote++
+		} else {
+			vote--
+		}
+	}
+
+	return ele
 }
