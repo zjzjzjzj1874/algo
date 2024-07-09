@@ -43,8 +43,7 @@ func isPalindrome(head *ListNode) bool {
 	return true
 }
 
-// TODO O(1)复杂度的算法：使用快慢指针，1.找到一半长度的链表；2.反转后半部分的链表；3.比较前后段部分是否相同，返回结果
-
+// O(1)复杂度的算法：使用快慢指针，1.找到一半长度的链表；2.反转后半部分的链表；3.比较前后段部分是否相同，返回结果
 // 解题：进阶 =》快慢指针
 func isPalindromeFastSlow(head *ListNode) bool {
 	if head == nil || head.Next == nil {
@@ -53,11 +52,50 @@ func isPalindromeFastSlow(head *ListNode) bool {
 
 	fast := head
 	slow := head
-	for fast.Next != nil && fast.Next.Next != nil {
+	for fast != nil && fast.Next != nil {
 		fast = fast.Next.Next
 		slow = slow.Next
 	}
 	// 这里慢指针走到一半了，快指针走完了
+
+	var pre *ListNode
+	for slow != nil {
+		next := slow.Next
+		slow.Next = pre
+		pre = slow
+		slow = next
+	}
+
+	cur := head
+	for pre != nil {
+		if cur.Val != pre.Val {
+			return false
+		}
+		cur = cur.Next
+		pre = pre.Next
+	}
+
+	return true
+}
+
+// O(n)复杂度的算法：使用快慢指针，1.找到一半长度的链表；2.反转后半部分的链表；3.比较前后段部分是否相同，返回结果
+// 解题：进阶 =》快慢指针
+func isPalindromeArr(head *ListNode) bool {
+	if head == nil || head.Next == nil {
+		return true
+	}
+	nums := make([]int, 0, 4)
+
+	for cur := head; cur != nil; cur = cur.Next {
+		nums = append(nums, cur.Val)
+	}
+
+	n := len(nums)
+	for i := 0; i <= (n-1)/2; i++ {
+		if nums[i] != nums[n-1-i] {
+			return false
+		}
+	}
 
 	return true
 }
