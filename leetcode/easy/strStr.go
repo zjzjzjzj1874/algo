@@ -72,3 +72,58 @@ func strStrKMP(haystack, needle string) int {
 	}
 	return -1
 }
+
+func strStrWithKMP(haystack, needle string) int {
+	m, n := len(haystack), len(needle)
+	if n == 0 {
+		return 0
+	}
+
+	i := 0
+	j := 0
+
+	next := next(needle)
+	for i < m && j < n {
+		if haystack[i] == needle[j] {
+			i++
+			j++
+		} else if next[j] == -1 { // j == 0
+			i++
+		} else {
+			j = next[j]
+		}
+	}
+
+	if j == n {
+		return i - j
+	}
+
+	return -1
+}
+
+func next(needle string) []int {
+	if len(needle) == 1 {
+		return []int{0}
+	}
+
+	next := make([]int, len(needle))
+	next[0] = -1
+	next[1] = 0
+
+	i := 2
+	cn := 0
+	for i < len(needle) {
+		if needle[i-1] == needle[cn] {
+			cn++
+			next[i] = cn
+			i++
+		} else if cn > 0 {
+			cn = next[cn]
+		} else {
+			next[i] = 0
+			i++
+		}
+	}
+
+	return next
+}
