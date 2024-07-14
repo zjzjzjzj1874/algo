@@ -84,13 +84,13 @@ func strStrWithKMP(haystack, needle string) int {
 
 	next := next(needle)
 	for i < m && j < n {
-		if haystack[i] == needle[j] {
+		if haystack[i] == needle[j] { // 相同，大家携手向后
 			i++
 			j++
-		} else if next[j] == -1 { // j == 0
+		} else if next[j] == -1 { // j == 0，实在没法往前了，长串向后移动
 			i++
 		} else {
-			j = next[j]
+			j = next[j] // 可以找下一个子串
 		}
 	}
 
@@ -110,8 +110,8 @@ func next(needle string) []int {
 	next[0] = -1
 	next[1] = 0
 
-	i := 2
-	cn := 0
+	i := 2  // Next数组的下标
+	cn := 0 // 计算最长子串的下标
 	for i < len(needle) {
 		if needle[i-1] == needle[cn] {
 			cn++

@@ -29,37 +29,77 @@ import "sort"
 
 // 解题：i + j + k = 0; i + k = -j => 理解为：两个数找等于第三个数相反数的数；i+k > -j ; => i+k+j > 0，j右移；i+k+j<0，j左移
 
+//	func threeSum(nums []int) [][]int {
+//		sort.Ints(nums) // 先对数组进行排序
+//
+//		result := make([][]int, 0, 4)
+//		for first := 0; first < len(nums); first++ {
+//			if first > 0 && nums[first] == nums[first-1] { // 第一个数和上一个数相同时，不做任何操作
+//				continue
+//			}
+//
+//			target := -nums[first] // 退化为双指针问题
+//			third := len(nums) - 1
+//			second := first + 1
+//			for second < third {
+//				if second > first+1 && nums[second] == nums[second-1] { // 第二个数和上一个数相同时，不做任何操作
+//					second++
+//					continue
+//				}
+//				if nums[second]+nums[third] > target {
+//					third--
+//					continue
+//				} else if nums[second]+nums[third] < target {
+//					second++
+//					continue
+//				}
+//
+//				if nums[second]+nums[third] == target {
+//					result = append(result, []int{nums[first], nums[second], nums[third]})
+//					second++
+//				}
+//			}
+//		}
+//
+//		return result
+//	}
 func threeSum(nums []int) [][]int {
-	sort.Ints(nums) // 先对数组进行排序
+	// 双指针+两数之和
+	n := len(nums)
+	if n < 3 {
+		return [][]int{}
+	}
 
-	result := make([][]int, 0, 4)
-	for first := 0; first < len(nums); first++ {
-		if first > 0 && nums[first] == nums[first-1] { // 第一个数和上一个数相同时，不做任何操作
+	sort.Ints(nums) // 对数组排序
+
+	ans := make([][]int, 0, n)
+	for i := 0; i < n; i++ {
+		if i > 0 && nums[i] == nums[i-1] {
+			// 和前一个数重复，直接跳过，避免重复计数
 			continue
 		}
+		sum := -1 * nums[i]
+		// 退化成两数之和
 
-		target := -nums[first] // 退化为双指针问题
-		third := len(nums) - 1
-		second := first + 1
-		for second < third {
-			if second > first+1 && nums[second] == nums[second-1] { // 第二个数和上一个数相同时，不做任何操作
-				second++
-				continue
-			}
-			if nums[second]+nums[third] > target {
-				third--
-				continue
-			} else if nums[second]+nums[third] < target {
-				second++
-				continue
+		x := i + 1
+		y := n - 1
+
+		for x < y {
+			if x > i+1 && nums[x] == nums[x-1] {
+				x++
+				continue // 重复，避免重复计数
 			}
 
-			if nums[second]+nums[third] == target {
-				result = append(result, []int{nums[first], nums[second], nums[third]})
-				second++
+			if nums[x]+nums[y] == sum {
+				ans = append(ans, []int{nums[i], nums[x], nums[y]})
+				x++
+			} else if nums[x]+nums[y] > sum {
+				y--
+			} else {
+				x++
 			}
 		}
 	}
 
-	return result
+	return ans
 }
