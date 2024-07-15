@@ -69,3 +69,6 @@ leetcode 66 号算法题：加 1
 leetcode 415 号算法题：字符串相加
 leetcode 67 号算法题：二进制求和
 leetcode 2 号算法题：两数相加
+
+Manacher算法：最有意义的:求解回文数组
+![img.png](img.png)
