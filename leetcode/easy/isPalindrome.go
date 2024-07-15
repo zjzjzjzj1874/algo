@@ -26,25 +26,79 @@ import "strings"
 // s 仅由可打印的 ASCII 字符组成
 
 // 解题：先将s转成小写字母，去除特殊符号和数字，然后使用双指针
+//
+//	func isPalindrome(s string) bool {
+//		if s == "" {
+//			return true
+//		}
+//
+//		ns := strings.Builder{}
+//		for i := range s {
+//			ns.Grow(1)
+//			c := s[i]
+//			if (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') {
+//				ns.WriteByte(s[i])
+//			}
+//		}
+//		nstr := strings.ToLower(ns.String())
+//		n := len(nstr)
+//		left := 0
+//		right := n - 1
+//		for left < right {
+//			if nstr[left] != nstr[right] {
+//				return false
+//			}
+//			left++
+//			right--
+//		}
+//
+//		return true
+//	}
+
 func isPalindrome(s string) bool {
-	if s == "" {
+	if len(s) <= 1 {
 		return true
 	}
 
-	ns := strings.Builder{}
+	str := ""
 	for i := range s {
-		ns.Grow(1)
-		c := s[i]
-		if (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') {
-			ns.WriteByte(s[i])
+		if isAscii(s[i]) {
+			str += string(s[i])
 		}
 	}
-	nstr := strings.ToLower(ns.String())
-	n := len(nstr)
+
+	str = strings.ToLower(str)
+	n := len(str)
+	for i := 0; i < n/2; i++ {
+		if str[i] != str[n-i-1] {
+			return false
+		}
+	}
+
+	return true
+}
+
+func isPalindromeWithO1(s string) bool {
+	if len(s) <= 1 {
+		return true
+	}
+
+	s = strings.ToLower(s)
+	n := len(s)
 	left := 0
 	right := n - 1
+
 	for left < right {
-		if nstr[left] != nstr[right] {
+		if left < right && !isAscii(s[left]) {
+			left++
+			continue
+		}
+		if left < right && !isAscii(s[right]) {
+			right--
+			continue
+		}
+
+		if s[left] != s[right] {
 			return false
 		}
 		left++
@@ -52,4 +106,8 @@ func isPalindrome(s string) bool {
 	}
 
 	return true
+}
+
+func isAscii(b byte) bool {
+	return (b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z') || (b >= '0' && b <= '9')
 }
