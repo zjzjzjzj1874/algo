@@ -1,4 +1,4 @@
-package middle
+package monitonicStack
 
 // 503. 下一个更大元素 II
 // 给定一个循环数组 nums （ nums[nums.length - 1] 的下一个元素是 nums[0] ），返回 nums 中每个元素的 下一个更大元素 。
