@@ -26,3 +26,40 @@ func Test_findTwoSwapped(t *testing.T) {
 		})
 	}
 }
+func Test_rob(t *testing.T) {
+	type args struct {
+		root *TreeNode
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "rob",
+			args: args{
+				root: &TreeNode{
+					Val: 4,
+					Left: &TreeNode{
+						Val: 1,
+						Left: &TreeNode{
+							Val: 2,
+							Left: &TreeNode{
+								Val:   3,
+								Left:  &TreeNode{},
+								Right: nil},
+							Right: nil},
+						Right: nil},
+					Right: nil,
+				}},
+			want: 7},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := rob(tt.args.root)
+			if got != tt.want {
+				t.Errorf("findTwoSwapped() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
