@@ -1,0 +1,98 @@
+package monitonicStack
+
+// LCR 037. 行星碰撞
+// 给定一个整数数组 asteroids，表示在同一行的小行星。
+//
+// 对于数组中的每一个元素，其绝对值表示小行星的大小，正负表示小行星的移动方向（正表示向右移动，负表示向左移动）。每一颗小行星以相同的速度移动。
+//
+// 找出碰撞后剩下的所有小行星。碰撞规则：两个行星相互碰撞，较小的行星会爆炸。如果两颗行星大小相同，则两颗行星都会爆炸。两颗移动方向相同的行星，永远不会发生碰撞。
+//
+// 示例 1：
+//
+// 输入：asteroids = [5,10,-5]
+// 输出：[5,10]
+// 解释：10 和 -5 碰撞后只剩下 10 。 5 和 10 永远不会发生碰撞。
+// 示例 2：
+//
+// 输入：asteroids = [8,-8]
+// 输出：[]
+// 解释：8 和 -8 碰撞后，两者都发生爆炸。
+// 示例 3：
+//
+// 输入：asteroids = [10,2,-5]
+// 输出：[10]
+// 解释：2 和 -5 发生碰撞后剩下 -5 。10 和 -5 发生碰撞后剩下 10 。
+// 示例 4：
+//
+// 输入：asteroids = [-2,-1,1,2]
+// 输出：[-2,-1,1,2]
+// 解释：-2 和 -1 向左移动，而 1 和 2 向右移动。 由于移动方向相同的行星不会发生碰撞，所以最终没有行星发生碰撞。
+//
+// 提示：
+//
+// 2 <= asteroids.length <= 104
+// -1000 <= asteroids[i] <= 1000
+// asteroids[i] != 0
+//
+// 注意：本题与主站 735 题相同： https://leetcode-cn.com/problems/asteroid-collision/
+
+// 解题：单调栈
+func asteroidCollision(asteroids []int) []int {
+	n := len(asteroids)
+	ans := make([]int, 0, n)
+
+	// 栈：从左往右依次将正数放入栈顶，遇到负数pop，比大小之后看谁能留下
+	stack := make([]int, 0, 4) // 这里不需要存放index了，因为没有意义，直接存放行星size
+
+	for _, size := range asteroids {
+		if size > 0 {
+			stack = append(stack, size)
+			continue
+		}
+
+		// size < 0, 开始从栈顶弹出元素pk
+		isSame := false
+		for len(stack) > 0 && stack[len(stack)-1]+size <= 0 {
+			if len(stack) > 0 && stack[len(stack)-1]+size == 0 {
+				stack = stack[:len(stack)-1] // 负数+正数 = 负数，继续拿栈顶元素pk
+				isSame = true
+				break
+			}
+			stack = stack[:len(stack)-1] // 负数+正数 = 负数，继续拿栈顶元素pk
+		}
+
+		if len(stack) == 0 && !isSame {
+			ans = append(ans, size)
+		}
+	}
+
+	// 清算
+	for _, size := range stack {
+		ans = append(ans, size)
+	}
+
+	return ans
+}
+func asteroidCollisionWithLT(asteroids []int) []int {
+	// 栈：从左往右依次将正数放入栈顶，遇到负数pop，比大小之后看谁能留下
+	ans := make([]int, 0, len(asteroids))
+
+	for _, size := range asteroids {
+		alive := true
+
+		// 一旦遇到负数，如果栈内有元素，而且栈顶元素>0,则拿出来做碰撞测试
+		for alive && size < 0 && len(ans) > 0 && ans[len(ans)-1] > 0 {
+			// size < 0, 开始从栈顶弹出元素pk
+			alive = size+ans[len(ans)-1] < 0 // 小于0，当前元素活着
+			if ans[len(ans)-1]+size <= 0 {
+				ans = ans[:len(ans)-1] // 栈顶元素消失
+			}
+		}
+
+		if alive {
+			ans = append(ans, size)
+		}
+	}
+
+	return ans
+}

@@ -1,4 +1,4 @@
-package linkedList
+package monitonicStack
 
 // 1019. 链表中的下一个更大节点
 // 给定一个长度为 n 的链表 head
