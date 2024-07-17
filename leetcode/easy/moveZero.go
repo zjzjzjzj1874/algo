@@ -15,14 +15,35 @@ package easy
 // 进阶：你能尽量减少完成的操作次数吗？
 
 // 解题：双指针，快慢指针，快指针取遍历数组，慢指针保留最近一个非零元素的index,快慢指针中间的元素一定是0
+//
+//	func moveZeroes(nums []int) {
+//		fast, slow := 0, 0
+//
+//		for fast < len(nums) {
+//			if nums[fast] != 0 { // 快指针遇到0了，要和慢指针的交换位置
+//				nums[fast], nums[slow] = nums[slow], nums[fast]
+//				slow++
+//			}
+//			fast++
+//		}
+//	}
 func moveZeroes(nums []int) {
-	fast, slow := 0, 0
+	// 解题：维护两个指针，一个指针指向0，一个指向非0，然后非0和0遇到后交换位置
 
-	for fast < len(nums) {
-		if nums[fast] != 0 { // 快指针遇到0了，要和慢指针的交换位置
-			nums[fast], nums[slow] = nums[slow], nums[fast]
-			slow++
+	left := -1 // 指向0的指针
+	// right := 0 // 正常往右移动的指针
+
+	for right := 0; right < len(nums); right++ {
+		if nums[right] == 0 {
+			if left == -1 {
+				left = right // 遇到0指针
+			}
+			continue
 		}
-		fast++
+
+		if left != -1 {
+			nums[right], nums[left] = nums[left], nums[right]
+			left++
+		}
 	}
 }
