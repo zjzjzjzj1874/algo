@@ -1,6 +1,8 @@
 package tree
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test_findTwoSwapped(t *testing.T) {
 	type args struct {
