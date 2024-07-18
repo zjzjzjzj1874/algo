@@ -1,6 +1,8 @@
 package tree
 
 import (
+	"fmt"
+	"math"
 	"testing"
 )
 
@@ -28,4 +30,8 @@ func Test_maxDepth(t *testing.T) {
 			}
 		})
 	}
+
+	t.Run("MathPow", func(t *testing.T) {
+		fmt.Println(math.Pow(2, 4))
+	})
 }
