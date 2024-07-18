@@ -31,6 +31,8 @@ package dp
 // dp[2] = 2
 // 状态转移方程
 // dp[i] = dp[i-1]+dp[i-2]
+// https://blog.csdn.net/fengzheng1232/article/details/127628014
+// 对动态规划解法中状态转移方程f(n) = f(n-1) + f(n-2)的理解，这个说明稍微友好一点
 func climbStairs(n int) int {
 	if n == 1 || n == 2 {
 		return n
@@ -39,7 +41,7 @@ func climbStairs(n int) int {
 	// 这里0不存在，我们统一把Index向前移动一步，这样不需要对dp数组进行扩容
 	dp[0] = 1
 	dp[1] = 2
-	for i := 2; i < n; i++ {
+	for i := 2; i < n; i++ { // 因为这里我们统一向前处理了一个
 		dp[i] = dp[i-1] + dp[i-2]
 	}
 
