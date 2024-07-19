@@ -94,3 +94,49 @@ func Test_Rob(t *testing.T) {
 		})
 	}
 }
+
+// LCR 091. 粉刷房子
+func Test_minCost(t *testing.T) {
+	type args struct {
+		costs [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "minCost", args: args{costs: [][]int{{7, 6, 2}}}, want: 2},
+		{name: "minCost", args: args{costs: [][]int{{17, 2, 17}, {16, 16, 5}, {14, 3, 19}}}, want: 10},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := minCost(tt.args.costs); got != tt.want {
+				t.Errorf("minCost() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_minCoin(t *testing.T) {
+	type args struct {
+		coins  []int
+		target int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "minCoins", args: args{coins: []int{2, 3, 100}, target: 5}, want: 2},
+		{name: "minCoins", args: args{coins: []int{7, 4, 5, 2, 3, 2}, target: 10}, want: 2},
+		{name: "minCoins", args: args{coins: []int{17, 17, 10, 5, 5}, target: 10}, want: 1},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			//if got := minCoins(tt.args.coins, tt.args.target); got != tt.want {
+			if got := minCoinsWithDP(tt.args.coins, tt.args.target); got != tt.want {
+				t.Errorf("minCoins() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
