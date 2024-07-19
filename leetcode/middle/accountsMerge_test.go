@@ -65,3 +65,29 @@ func Test_accountsMerge(t *testing.T) {
 		})
 	}
 }
+
+// 面试题 16.10. 生存人数
+func Test_maxAliveYear(t *testing.T) {
+	type args struct {
+		birth []int
+		death []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "maxAlive", args: args{birth: []int{1900, 1901, 1950}, death: []int{1948, 1951, 2000}}, want: 1901},
+		{name: "maxAlive", args: args{
+			birth: []int{1972, 1908, 1915, 1957, 1960, 1948, 1912, 1903, 1949, 1977, 1900, 1957, 1934, 1929, 1913, 1902, 1903, 1901},
+			death: []int{1997, 1932, 1963, 1997, 1983, 2000, 1926, 1962, 1955, 1997, 1998, 1989, 1992, 1975, 1940, 1903, 1983, 1969}},
+			want: 1960},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := maxAliveYear(tt.args.birth, tt.args.death); got != tt.want {
+				t.Errorf("maxAliveYear() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
