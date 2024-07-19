@@ -106,3 +106,46 @@ func partitionV2(nums []int, l, r int) []int {
 
 	return []int{less + 1, more - 1}
 }
+
+// 面试题 17.14. 最小K个数
+func smallestK(arr []int, k int) (ans []int) {
+	n := len(arr)
+	if n <= k {
+		return arr
+	}
+
+	for i := n / 2; i >= 0; i-- {
+		heapifySmall(arr, n, i)
+	}
+
+	for i := n - 1; i > n-k-1; i-- {
+		ans = append(ans, arr[0])
+		arr[i], arr[0] = arr[0], arr[i]
+		heapifySmall(arr, i, 0)
+	}
+
+	return ans
+}
+
+// 创建小根堆
+func heapifySmall(nums []int, n, i int) {
+	for {
+		small := i
+		left := 2*i + 1
+		right := 2*i + 2
+		if left < n && nums[left] < nums[small] {
+			small = left
+		}
+		if right < n && nums[right] < nums[small] {
+			small = right
+		}
+
+		if small == i { // 左右孩子并没有比父大，break
+			break
+		}
+
+		nums[small], nums[i] = nums[i], nums[small]
+
+		i = small
+	}
+}
