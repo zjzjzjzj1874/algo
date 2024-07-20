@@ -1,6 +1,8 @@
 package leetcode
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // HeapSort 堆排
 func HeapSort(nums []int) {

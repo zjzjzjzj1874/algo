@@ -126,3 +126,57 @@ func sort(head, tail *ListNode) *ListNode {
 
 	return merge(sort(head, mid), sort(mid, tail))
 }
+
+// 时间：2024.07.20
+func sortListWithNew(head *ListNode) *ListNode {
+	// 递归分治，把链表搞成一个一个节点，最后比较串联起来
+	return splitNode(head, nil)
+}
+
+func splitNode(head, tail *ListNode) *ListNode {
+	if head == tail || head == nil { // base case
+		return head
+	}
+	if head.Next == tail { // 切断后续的，否则跳不出循环
+		head.Next = nil
+		return head
+	}
+
+	// 快慢指针求中点，然后分隔
+	fast, slow := head, head
+	for fast != tail {
+		fast = fast.Next
+		slow = slow.Next
+
+		if fast != tail {
+			fast = fast.Next
+		} else {
+			break
+		}
+	}
+	mid := slow
+	left := splitNode(head, mid)
+	right := splitNode(mid, tail)
+
+	// 排序链表
+	dummy := &ListNode{}
+	cur := dummy
+	for left != nil && right != nil {
+		if left.Val < right.Val {
+			cur.Next = left
+			left = left.Next
+		} else {
+			cur.Next = right
+			right = right.Next
+		}
+		cur = cur.Next
+	}
+	if left != nil {
+		cur.Next = left
+	}
+	if right != nil {
+		cur.Next = right
+	}
+
+	return dummy.Next
+}

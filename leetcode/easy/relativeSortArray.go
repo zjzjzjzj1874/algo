@@ -60,3 +60,33 @@ func relativeSortArray(arr1 []int, arr2 []int) []int {
 
 	return ans
 }
+
+func relativeSortArrayWithLT(arr1 []int, arr2 []int) []int {
+	if len(arr1) == 0 {
+		return arr2
+	}
+	if len(arr2) == 0 {
+		return arr1
+	}
+
+	rank := make(map[int]int) // map[arr2]index
+	for i := range arr2 {
+		rank[arr2[i]] = i
+	}
+	sort.Slice(arr1, func(i int, j int) bool {
+		x, y := arr1[i], arr1[j]
+		rankX, hasX := rank[x]
+		rankY, hasY := rank[y]
+		if hasX && hasY {
+			return rankX < rankY
+		}
+		if hasX || hasY {
+			// 如果 hasX 为 true 而 hasY 为 false，return hasX 将返回 true，表示 x 排在 y 之前。
+			// 如果 hasX 为 false 而 hasY 为 true，return hasX 将返回 false，表示 x 排在 y 之后。
+			return hasX
+		}
+		return x < y
+	})
+
+	return arr1
+}

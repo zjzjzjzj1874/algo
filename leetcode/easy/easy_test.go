@@ -42,7 +42,8 @@ func Test_relativeSortArray(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := relativeSortArray(tt.args.arr1, tt.args.arr2); !reflect.DeepEqual(got, tt.want) {
+			if got := relativeSortArrayWithLT(tt.args.arr1, tt.args.arr2); !reflect.DeepEqual(got, tt.want) {
+				//if got := relativeSortArray(tt.args.arr1, tt.args.arr2); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("relativeSortArray() = %v, want %v", got, tt.want)
 			}
 		})
