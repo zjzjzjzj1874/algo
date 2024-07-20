@@ -137,6 +137,54 @@ func Test_pruneTree(t *testing.T) {
 	}
 }
 
+// LCR 049. 求根节点到叶节点数字之和
+func Test_sumNumbers(t *testing.T) {
+	type args struct {
+		root *TreeNode
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "sumNumber", args: args{root: &TreeNode{
+			Val: 1,
+			Left: &TreeNode{
+				Val:   2,
+				Left:  nil,
+				Right: nil},
+			Right: &TreeNode{
+				Val:   3,
+				Left:  nil,
+				Right: nil},
+		}}, want: 25},
+		{name: "sumNumber", args: args{root: &TreeNode{
+			Val: 4,
+			Left: &TreeNode{
+				Val: 9,
+				Left: &TreeNode{
+					Val:   5,
+					Left:  nil,
+					Right: nil},
+				Right: &TreeNode{
+					Val:   1,
+					Left:  nil,
+					Right: nil}},
+			Right: &TreeNode{
+				Val:   0,
+				Left:  nil,
+				Right: nil},
+		}}, want: 1026},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := sumNumbers(tt.args.root); got != tt.want {
+				t.Errorf("sumNumbers() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 104. 二叉树的最大深度
 func Test_maxDepth(t *testing.T) {
 	type args struct {
