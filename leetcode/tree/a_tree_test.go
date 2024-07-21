@@ -7,6 +7,51 @@ import (
 	"testing"
 )
 
+func Test_inorderSuccessor(t *testing.T) {
+	type args struct {
+		root *TreeNode
+		p    *TreeNode
+	}
+	tests := []struct {
+		name string
+		args args
+		want *TreeNode
+	}{
+		{name: "increaseBST", args: args{root: &TreeNode{
+			Val: 5,
+			Left: &TreeNode{
+				Val:   1,
+				Left:  nil,
+				Right: nil,
+			},
+			Right: &TreeNode{
+				Val:   7,
+				Right: nil,
+				Left:  nil,
+			},
+		}}, want: &TreeNode{
+			Val: 1,
+			Left: &TreeNode{
+				Val: 5,
+				Left: &TreeNode{
+					Val:   7,
+					Right: nil,
+					Left:  nil,
+				},
+				Right: nil,
+			},
+			Right: nil,
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := inorderSuccessor(tt.args.root, tt.args.p); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("inorderSuccessor() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // LCR 052. 递增顺序搜索树
 func Test_increasingBST(t *testing.T) {
 	type args struct {
