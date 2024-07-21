@@ -22,7 +22,7 @@ import "sort"
 //
 // 进阶：你所设计算法的时间复杂度 必须 优于 O(n log n) ，其中 n 是数组大小。
 
-// 解题：
+// 解题思路：使用hash表，存储元素和出现次数，然后排序
 func topKFrequent(nums []int, k int) []int {
 	// 前K个，最多有k个，还需要去重 hash表去重
 	nMap := make(map[int]int) // map[num]count
@@ -43,4 +43,36 @@ func topKFrequent(nums []int, k int) []int {
 	return ans[:k]
 }
 
-//  解题思路：使用hash表，先存储
+// 解题：计数排序,可以找出现频率topK和minK的值
+func topKFrequentWithCount(nums []int, k int) []int {
+	// 前K个，最多有k个，还需要去重 hash表去重
+	nMap := make(map[int]int) // map[num]count
+
+	for _, num := range nums {
+		nMap[num]++
+	}
+	// 计数排序，创建一个大小为n+1的数组，cnt[val]表示出现x次的数字的个数
+	cnt := make([]int, len(nums)+1)
+	for _, val := range nMap {
+		cnt[val]++
+	}
+
+	i := len(nums)
+	j := 0 // 记录累计频率计数，
+	// 从高到低遍历 cnt 数组，找到累计频率达到 k 的频率值 i。
+	for ; i >= 0; i-- {
+		j = j + cnt[i]
+		if j >= k { // 当j累计到k一样的时候，停止计数，并停止循环
+			break
+		}
+	}
+
+	ans := make([]int, 0, k)
+	for k, v := range nMap {
+		if v >= i {
+			ans = append(ans, k)
+		}
+	}
+
+	return ans
+}
