@@ -6,6 +6,29 @@ import (
 	"testing"
 )
 
+// LCR 014. 字符串的排列
+func Test_checkInclusion(t *testing.T) {
+	type args struct {
+		s1 string
+		s2 string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "checkInclusion", args: args{s1: "ab", s2: "eidbaooo"}, want: true},
+		{name: "checkInclusion", args: args{s1: "ab", s2: "eidboaoo"}, want: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := checkInclusion(tt.args.s1, tt.args.s2); got != tt.want {
+				t.Errorf("checkInclusion() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 47. 前 K 个高频元素
 func Test_topKFrequent(t *testing.T) {
 	type args struct {
