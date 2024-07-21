@@ -7,6 +7,51 @@ import (
 	"testing"
 )
 
+// LCR 052. 递增顺序搜索树
+func Test_increasingBST(t *testing.T) {
+	type args struct {
+		root *TreeNode
+	}
+	tests := []struct {
+		name string
+		args args
+		want *TreeNode
+	}{
+		{name: "increaseBST", args: args{root: &TreeNode{
+			Val: 5,
+			Left: &TreeNode{
+				Val:   1,
+				Left:  nil,
+				Right: nil,
+			},
+			Right: &TreeNode{
+				Val:   7,
+				Right: nil,
+				Left:  nil,
+			},
+		}}, want: &TreeNode{
+			Val: 1,
+			Left: &TreeNode{
+				Val: 5,
+				Left: &TreeNode{
+					Val:   7,
+					Right: nil,
+					Left:  nil,
+				},
+				Right: nil,
+			},
+			Right: nil,
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := increasingBST(tt.args.root); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("increasingBST() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 94. 二叉树的中序遍历
 func Test_inorderTraversal(t *testing.T) {
 	type args struct {
