@@ -7,6 +7,60 @@ import (
 	"testing"
 )
 
+// LCR 054. 把二叉搜索树转换为累加树
+func Test_convertBST(t *testing.T) {
+	type args struct {
+		root *TreeNode
+	}
+	tests := []struct {
+		name string
+		args args
+		want *TreeNode
+	}{
+		{name: "convertBST", args: args{root: &TreeNode{
+			Val: 3,
+			Left: &TreeNode{
+				Val: 2,
+				Left: &TreeNode{
+					Val:   1,
+					Right: nil,
+					Left:  nil,
+				},
+				Right: nil,
+			},
+			Right: &TreeNode{
+				Val:   4,
+				Right: nil,
+				Left:  nil,
+			},
+		}}, want: &TreeNode{
+			Val: 7,
+			Left: &TreeNode{
+				Val: 9,
+				Left: &TreeNode{
+					Val:   10,
+					Right: nil,
+					Left:  nil,
+				},
+				Right: nil,
+			},
+			Right: &TreeNode{
+				Val:   4,
+				Right: nil,
+				Left:  nil,
+			},
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := convertBST(tt.args.root); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("convertBST() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// LCR 053. 二叉搜索树中的中序后继
 func Test_inorderSuccessor(t *testing.T) {
 	type args struct {
 		root *TreeNode
