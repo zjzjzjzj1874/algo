@@ -32,11 +32,3 @@ func maxDepth(root *TreeNode) int {
 	maxRight := maxDepth(root.Right)
 	return max(maxLeft, maxRight) + 1
 }
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-
-	return b
-}

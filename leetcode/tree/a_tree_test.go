@@ -7,6 +7,80 @@ import (
 	"testing"
 )
 
+// LCR 051. 二叉树中的最大路径和
+func Test_maxPathSum(t *testing.T) {
+	type args struct {
+		root *TreeNode
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "maxPathSum", args: args{root: &TreeNode{
+			Val: 1,
+			Left: &TreeNode{
+				Val: -2,
+				Left: &TreeNode{
+					Val: 1,
+					Right: &TreeNode{
+						Val:   -1,
+						Right: nil,
+						Left:  nil,
+					},
+					Left: nil,
+				},
+				Right: &TreeNode{
+					Val:   3,
+					Right: nil,
+					Left:  nil,
+				},
+			},
+			Right: &TreeNode{
+				Val: -3,
+				Left: &TreeNode{
+					Val:   -2,
+					Right: nil,
+					Left:  nil,
+				},
+				Right: nil,
+			},
+		}}, want: 3},
+		{name: "maxPathSum", args: args{root: &TreeNode{
+			Val: -10,
+			Left: &TreeNode{
+				Val:   9,
+				Left:  nil,
+				Right: nil,
+			},
+			Right: &TreeNode{
+				Val: 20,
+				Left: &TreeNode{
+					Val:   15,
+					Right: nil,
+					Left:  nil,
+				},
+				Right: &TreeNode{
+					Val:   7,
+					Right: nil,
+					Left:  nil,
+				},
+			},
+		}}, want: 42},
+		{name: "maxPathSum", args: args{root: &TreeNode{
+			Val:   -3,
+			Left:  nil,
+			Right: nil}}, want: -3},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := maxPathSum(tt.args.root); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("maxPathSum() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // LCR 054. 把二叉搜索树转换为累加树
 func Test_convertBST(t *testing.T) {
 	type args struct {
