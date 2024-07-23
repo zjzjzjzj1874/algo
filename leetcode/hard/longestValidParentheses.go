@@ -93,10 +93,3 @@ func longestValidParenthesesStack(s string) int {
 	}
 	return maxAns
 }
-
-func max(x, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
