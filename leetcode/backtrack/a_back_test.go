@@ -5,7 +5,28 @@ import (
 	"testing"
 )
 
-// LCR 0810. 组合
+// LCR 079. 子集
+func Test_subSet(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns [][]int
+	}{
+		{name: "subsets", args: args{nums: []int{1, 2, 3}}, wantAns: [][]int{{}, {1}, {2}, {3}, {1, 2}, {1, 3}, {2, 3}, {1, 2, 3}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := subsets(tt.args.nums); !reflect.DeepEqual(gotAns, tt.wantAns) {
+				t.Errorf("subsets() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
+// LCR 080. 组合
 func Test_combine(t *testing.T) {
 	type args struct {
 		n int
