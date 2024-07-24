@@ -1,5 +1,7 @@
 package backtrack
 
+import "fmt"
+
 // LCR 083. 全排列
 // 给定一个不含重复数字的整数数组 nums ，返回其 所有可能的全排列 。可以 按任意顺序 返回答案。
 //
@@ -47,8 +49,12 @@ func process(nums, choice *[]int, selected *[]bool, res *[][]int) {
 
 		*choice = append(*choice, (*nums)[i]) // 选择当前元素
 		(*selected)[i] = true                 // 变更选择状态
+		fmt.Println("递归之前：", choice)
+		fmt.Println("递归之前：", selected)
 		process(nums, choice, selected, res)
 		(*selected)[i] = false // 撤销选择
 		*choice = (*choice)[:len(*choice)-1]
+		fmt.Println("	递归之后：", choice)
+		fmt.Println("	递归之后：", selected)
 	}
 }
