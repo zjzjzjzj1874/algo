@@ -27,6 +27,37 @@ import "fmt"
 // 注意：本题与主站 46 题相同：https://leetcode-cn.com/problems/permutations/
 
 // 解题：回溯
+func permuteWithDfs(nums []int) (ans [][]int) {
+	n := len(nums)
+	choice := make([]int, 0, n)
+	selected := make([]bool, n)
+
+	var dfs func()
+	dfs = func() {
+		if n == len(choice) { // 拼好一个答案
+			ans = append(ans, append([]int{}, choice...))
+			return
+		}
+
+		for i := 0; i < n; i++ {
+			if selected[i] {
+				continue
+			}
+
+			selected[i] = true
+			choice = append(choice, nums[i])
+			dfs()
+
+			selected[i] = false
+			choice = choice[:len(choice)-1]
+		}
+	}
+
+	dfs()
+	return
+}
+
+// 解题：回溯
 func permute(nums []int) (ans [][]int) {
 	choice := make([]int, 0, len(nums))
 	selected := make([]bool, len(nums))

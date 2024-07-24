@@ -19,7 +19,9 @@ func Test_subSet(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if gotAns := subsets(tt.args.nums); !reflect.DeepEqual(gotAns, tt.wantAns) {
+			if gotAns := subsetsWithDFSAns(tt.args.nums); !reflect.DeepEqual(gotAns, tt.wantAns) {
+				//if gotAns := subsetsWithDFSInput(tt.args.nums); !reflect.DeepEqual(gotAns, tt.wantAns) {
+				//if gotAns := subsets(tt.args.nums); !reflect.DeepEqual(gotAns, tt.wantAns) {
 				t.Errorf("subsets() = %v, want %v", gotAns, tt.wantAns)
 			}
 		})
@@ -112,7 +114,8 @@ func Test_permute(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if gotAns := permute(tt.args.nums); !reflect.DeepEqual(gotAns, tt.wantAns) {
+			if gotAns := permuteWithDfs(tt.args.nums); !reflect.DeepEqual(gotAns, tt.wantAns) {
+				//if gotAns := permute(tt.args.nums); !reflect.DeepEqual(gotAns, tt.wantAns) {
 				t.Errorf("permute() = %v, want %v", gotAns, tt.wantAns)
 			}
 		})
