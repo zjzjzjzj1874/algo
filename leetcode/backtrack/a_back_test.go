@@ -30,6 +30,31 @@ func Test_combinationSum(t *testing.T) {
 	}
 }
 
+// LCR 082. 组合总和 II
+func Test_combinationSum2(t *testing.T) {
+	type args struct {
+		candidates []int
+		target     int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns [][]int
+	}{
+		{name: "combinationSum2", args: args{
+			candidates: []int{10, 1, 2, 7, 6, 1, 5},
+			target:     8,
+		}, wantAns: [][]int{{1, 1, 6}, {1, 2, 5}, {1, 7}, {2, 6}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := combinationSum2(tt.args.candidates, tt.args.target); !reflect.DeepEqual(gotAns, tt.wantAns) {
+				t.Errorf("combinationSum2() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // LCR 083. 全排列
 func Test_permute(t *testing.T) {
 	type args struct {

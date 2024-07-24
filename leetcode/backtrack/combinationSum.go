@@ -1,5 +1,7 @@
 package backtrack
 
+import "sort"
+
 // LCR 081. 组合总和
 // 给定一个无重复元素的正整数数组 candidates 和一个正整数 target ，找出 candidates 中所有可以使数字和为目标数 target 的唯一组合。
 //
@@ -66,6 +68,74 @@ func combinationSum(candidates []int, target int) (ans [][]int) {
 	}
 
 	process(0)
+
+	return
+}
+
+// LCR 082. 组合总和 II
+// 给定一个可能有重复数字的整数数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+//
+// candidates 中的每个数字在每个组合中只能使用一次，解集不能包含重复的组合。
+//
+// 示例 1:
+//
+// 输入: candidates = [10,1,2,7,6,1,5], target = 8,
+// 输出:
+// [
+// [1,1,6],
+// [1,2,5],
+// [1,7],
+// [2,6]
+// ]
+// 示例 2:
+//
+// 输入: candidates = [2,5,2,1,2], target = 5,
+// 输出:
+// [
+// [1,2,2],
+// [5]
+// ]
+//
+// 提示:
+//
+// 1 <= candidates.length <= 100
+// 1 <= candidates[i] <= 50
+// 1 <= target <= 30
+//
+// 注意：本题与主站 40 题相同： https://leetcode-cn.com/problems/combination-sum-ii/
+func combinationSum2(candidates []int, target int) (ans [][]int) {
+	sum := 0
+	choice := make([]int, 0, 4)
+	sort.Ints(candidates) // 排序
+
+	var backtrack func(start int)
+	backtrack = func(start int) {
+		if sum == target {
+			res := append([]int{}, choice...)
+			ans = append(ans, res)
+			return
+		}
+
+		for i := start; i < len(candidates); i++ {
+			num := candidates[i]
+			if sum+num > target { // 和超过目标值 || 被选择过
+				continue
+			}
+			if i > start && num == candidates[i-1] {
+				continue
+			}
+
+			sum += num
+			choice = append(choice, num)
+			backtrack(i + 1) // 不能重复选择，就直接选择下一个
+
+			// 回溯 = 撤销
+			sum -= num
+			choice = choice[:len(choice)-1]
+		}
+	}
+
+	backtrack(0)
 
 	return
 }
