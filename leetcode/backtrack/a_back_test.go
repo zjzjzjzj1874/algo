@@ -5,6 +5,28 @@ import (
 	"testing"
 )
 
+// LCR 0810. 组合
+func Test_combine(t *testing.T) {
+	type args struct {
+		n int
+		k int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns [][]int
+	}{
+		{name: "combine", args: args{n: 4, k: 2}, wantAns: [][]int{{1, 2}, {1, 3}, {1, 4}, {2, 3}, {2, 4}, {3, 4}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := combine(tt.args.n, tt.args.k); !reflect.DeepEqual(gotAns, tt.wantAns) {
+				t.Errorf("combination() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // LCR 081. 组合总和
 func Test_combinationSum(t *testing.T) {
 	type args struct {

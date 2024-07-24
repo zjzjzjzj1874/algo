@@ -2,6 +2,57 @@ package backtrack
 
 import "sort"
 
+// LCR 080. 组合
+// 给定两个整数 n 和 k，返回 1 ... n 中所有可能的 k 个数的组合。
+//
+// 示例 1:
+//
+// 输入: n = 4, k = 2
+// 输出:
+// [
+// [2,4],
+// [3,4],
+// [2,3],
+// [1,2],
+// [1,3],
+// [1,4],
+// ]
+// 示例 2:
+//
+// 输入: n = 1, k = 1
+// 输出: [[1]]
+//
+// 提示:
+//
+// 1 <= n <= 20
+// 1 <= k <= n
+//
+// 注意：本题与主站 77 题相同： https://leetcode-cn.com/problems/combinations/
+func combine(n int, k int) (ans [][]int) {
+	choice := make([]int, 0, k)
+
+	var backtrack func(start int)
+	backtrack = func(start int) {
+		if len(choice) == k {
+			res := append([]int{}, choice...)
+			ans = append(ans, res)
+			return
+		}
+
+		for i := start; i < n; i++ {
+			choice = append(choice, i+1)
+
+			backtrack(i + 1)
+
+			choice = choice[:len(choice)-1]
+		}
+	}
+
+	backtrack(0)
+
+	return
+}
+
 // LCR 081. 组合总和
 // 给定一个无重复元素的正整数数组 candidates 和一个正整数 target ，找出 candidates 中所有可以使数字和为目标数 target 的唯一组合。
 //
