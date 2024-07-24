@@ -5,6 +5,27 @@ import (
 	"testing"
 )
 
+// LCR 086. 分割回文串
+func Test_partition(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns [][]string
+	}{
+		{name: "partition", args: args{s: "aab"}, wantAns: [][]string{{"a", "a", "b"}, {"aa", "b"}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := partition(tt.args.s); !reflect.DeepEqual(gotAns, tt.wantAns) {
+				t.Errorf("partition() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // LCR 079. 子集
 func Test_subSet(t *testing.T) {
 	type args struct {
