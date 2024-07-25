@@ -5,6 +5,27 @@ import (
 	"testing"
 )
 
+// LCR 087. 复原 IP 地址
+func Test_restoreIpAddresses(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns []string
+	}{
+		{name: "restore", args: args{s: "25525511135"}, wantAns: []string{"255.255.11.135", "255.255.111.35"}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := restoreIpAddresses(tt.args.s); !reflect.DeepEqual(gotAns, tt.wantAns) {
+				t.Errorf("restoreIpAddresses() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // LCR 086. 分割回文串
 func Test_partition(t *testing.T) {
 	type args struct {
@@ -16,10 +37,12 @@ func Test_partition(t *testing.T) {
 		wantAns [][]string
 	}{
 		{name: "partition", args: args{s: "aab"}, wantAns: [][]string{{"a", "a", "b"}, {"aa", "b"}}},
+		{name: "partition", args: args{s: "google"}, wantAns: [][]string{{"g", "o", "o", "g", "l", "e"}, {"g", "oo", "g", "l", "e"}, {"goog", "l", "e"}}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if gotAns := partition(tt.args.s); !reflect.DeepEqual(gotAns, tt.wantAns) {
+			//if gotAns := partition(tt.args.s); !reflect.DeepEqual(gotAns, tt.wantAns) {
+			if gotAns := partitionWithAns(tt.args.s); !reflect.DeepEqual(gotAns, tt.wantAns) {
 				t.Errorf("partition() = %v, want %v", gotAns, tt.wantAns)
 			}
 		})

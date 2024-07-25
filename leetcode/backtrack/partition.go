@@ -59,3 +59,28 @@ func isPalindrome(s string, left, right int) bool {
 
 	return true
 }
+
+func partitionWithAns(s string) (ans [][]string) {
+	n := len(s)
+	choice := make([]string, 0, n)
+
+	// i表示当前位置
+	var dfs func(i int)
+	dfs = func(i int) {
+		if i == n {
+			ans = append(ans, append([]string{}, choice...))
+			return
+		}
+		for j := i; j < n; j++ {
+			if isPalindrome(s, i, j) {
+				choice = append(choice, s[i:j+1])
+				dfs(j + 1) // 下一个子串从j+1开始
+				choice = choice[:len(choice)-1]
+			}
+		}
+	}
+
+	dfs(0)
+
+	return
+}
