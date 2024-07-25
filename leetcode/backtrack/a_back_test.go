@@ -5,6 +5,27 @@ import (
 	"testing"
 )
 
+// LCR 085. 括号生成
+func Test_generateParenthesis(t *testing.T) {
+	type args struct {
+		n int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns []string
+	}{
+		{name: "generate", args: args{n: 3}, wantAns: []string{"((()))", "(()())", "(())()", "()(())", "()()()"}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := generateParenthesis(tt.args.n); !reflect.DeepEqual(gotAns, tt.wantAns) {
+				t.Errorf("generateParenthesis() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // LCR 087. 复原 IP 地址
 func Test_restoreIpAddresses(t *testing.T) {
 	type args struct {
