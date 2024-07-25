@@ -34,6 +34,64 @@ package linkedList
  * }
  */
 // 解题： 栈或数组
+func addTwoNumbersWithoutReverse(l1 *ListNode, l2 *ListNode) *ListNode {
+	nums1 := make([]int, 0, 4)
+	for cur := l1; cur != nil; cur = cur.Next {
+		nums1 = append(nums1, cur.Val)
+	}
+	nums2 := make([]int, 0, 4)
+	for cur := l2; cur != nil; cur = cur.Next {
+		nums2 = append(nums2, cur.Val)
+	}
+	n1 := len(nums1)
+	n2 := len(nums2)
+	n := n1
+	short := n2
+	if n2 > n {
+		n = n2
+		short = n1
+	}
+
+	dummy := &ListNode{}
+	cur := dummy
+	carry := 0
+
+	lists := make([]*ListNode, n+1)
+	for i := short - 1; i >= 0; i-- {
+		sum := carry + nums1[n1-short+i] + nums2[n2-short+i]
+		carry = sum / 10
+		lists[n-short+i+1] = &ListNode{Val: sum % 10}
+	}
+	nums1 = nums1[:n1-short]
+	nums2 = nums2[:n2-short]
+	if len(nums1) > 0 {
+		for i := len(nums1) - 1; i >= 0; i-- {
+			sum := carry + nums1[i]
+			carry = sum / 10
+			lists[i+1] = &ListNode{Val: sum % 10}
+		}
+	}
+	if len(nums2) > 0 {
+		for i := len(nums2) - 1; i >= 0; i-- {
+			sum := carry + nums2[i]
+			carry = sum / 10
+			lists[n-short+i+1] = &ListNode{Val: sum % 10}
+		}
+	}
+
+	if carry == 0 {
+		lists = lists[1:]
+	} else {
+		lists[0] = &ListNode{Val: carry}
+	}
+
+	for i := 0; i < len(lists); i++ {
+		cur.Next = lists[i]
+		cur = cur.Next
+	}
+
+	return dummy.Next
+}
 func addTwoNumbersWithStack(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l1 == nil {
 		return l2
