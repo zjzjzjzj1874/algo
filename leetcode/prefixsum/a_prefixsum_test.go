@@ -5,6 +5,29 @@ import (
 	"testing"
 )
 
+// 930. 和相同的二元子数组
+func Test_numSubArraysWithSum(t *testing.T) {
+	type args struct {
+		nums []int
+		goal int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "numSubArrays", args: args{nums: []int{1, 0, 1, 0, 1}, goal: 2}, wantAns: 4},
+		{name: "numSubArrays", args: args{nums: []int{0, 0, 0, 0, 0}, goal: 0}, wantAns: 15},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := numSubArraysWithSum(tt.args.nums, tt.args.goal); gotAns != tt.wantAns {
+				t.Errorf("numSubArraysWithSum() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 303. 区域和检索 - 数组不可变
 func TestNumArray_SumRange(t *testing.T) {
 	type fields struct {
