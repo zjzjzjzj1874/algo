@@ -2,6 +2,27 @@ package dp
 
 import "testing"
 
+// LCR 100. 三角形最小路径和
+func Test_minimumTotal(t *testing.T) {
+	type args struct {
+		triangle [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "minimumTotal", args: args{triangle: [][]int{{2}, {3, 4}, {6, 5, 7}, {4, 1, 8, 3}}}, want: 11},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := minimumTotal(tt.args.triangle); got != tt.want {
+				t.Errorf("minimumTotal() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // LCR 098. 不同路径
 func Test_uniquePaths(t *testing.T) {
 	type args struct {
