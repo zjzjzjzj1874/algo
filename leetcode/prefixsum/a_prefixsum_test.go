@@ -1,6 +1,7 @@
 package prefixsum
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -33,4 +34,14 @@ func TestNumArray_SumRange(t *testing.T) {
 			}
 		})
 	}
+
+	//307. 区域和检索 - 数组可修改
+	t.Run("307.区域和检索 - 数组可修改", func(t *testing.T) {
+		a := &NumArray{
+			nums: []int{1, 3, 5},
+		}
+		fmt.Println(a.SumRange(0, 2))
+		a.Update(1, 2)
+		fmt.Println(a.SumRange(0, 2))
+	})
 }
