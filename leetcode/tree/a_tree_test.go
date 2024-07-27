@@ -7,6 +7,55 @@ import (
 	"testing"
 )
 
+// LCR 050. 路径总和 III
+func Test_pathSum(t *testing.T) {
+	type args struct {
+		root      *TreeNode
+		targetSum int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "root", args: args{
+			root: &TreeNode{
+				Val: 10,
+				Left: &TreeNode{Val: 5,
+					Left: &TreeNode{Val: 3,
+						Left:  &TreeNode{Val: 3},
+						Right: &TreeNode{Val: -2}},
+					Right: &TreeNode{Val: 2,
+						Right: &TreeNode{Val: 1}}},
+				Right: &TreeNode{Val: -3,
+					Right: &TreeNode{Val: 11}},
+			},
+			targetSum: 8},
+			want: 3},
+		{name: "root", args: args{
+			root: &TreeNode{
+				Val: 5,
+				Left: &TreeNode{Val: 5,
+					Left: &TreeNode{Val: 3,
+						Left:  &TreeNode{Val: 3},
+						Right: &TreeNode{Val: -2}},
+					Right: &TreeNode{Val: 2,
+						Right: &TreeNode{Val: 1}}},
+				Right: &TreeNode{Val: -3,
+					Right: &TreeNode{Val: 11}},
+			},
+			targetSum: 8},
+			want: 3},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := pathSum(tt.args.root, tt.args.targetSum); got != tt.want {
+				t.Errorf("pathSum() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // LCR 051. 二叉树中的最大路径和
 func Test_maxPathSum(t *testing.T) {
 	type args struct {
