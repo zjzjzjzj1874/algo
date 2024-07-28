@@ -5,6 +5,28 @@ import (
 	"testing"
 )
 
+// LCR 102. 目标和
+func Test_findTargetSumWays(t *testing.T) {
+	type args struct {
+		nums   []int
+		target int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "findTargetSumWays", args: args{nums: []int{1, 1, 1, 1, 1}, target: 3}, wantAns: 5},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := findTargetSumWays(tt.args.nums, tt.args.target); gotAns != tt.wantAns {
+				t.Errorf("findTargetSumWays() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // LCR 085. 括号生成
 func Test_generateParenthesis(t *testing.T) {
 	type args struct {
