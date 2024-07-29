@@ -5,6 +5,233 @@ import (
 	"testing"
 )
 
+// 283. 移动零
+func Test_moveZeroes(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+	}{
+		{name: "moveZeroes", args: args{nums: []int{0, 1, 0, 3, 12}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			moveZeroes(tt.args.nums)
+		})
+	}
+}
+
+// 268. 丢失的数字
+func Test_missingNumber(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "missingNumber", args: args{nums: []int{3, 0, 1}}, want: 2},
+		{name: "missingNumber", args: args{nums: []int{9, 6, 4, 2, 3, 5, 7, 0, 1}}, want: 8},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := missingNumber(tt.args.nums); got != tt.want {
+				t.Errorf("missingNumber() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 121:买卖股票的最佳时机
+func Test_maxProfit(t *testing.T) {
+	type args struct {
+		prices []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		//{name: "test_max_profit", args: args{prices: []int{7, 1, 5, 3, 6, 4}}, want: 5},
+		//{name: "test_max_profit", args: args{prices: []int{7, 6, 4, 3, 1}}, want: 0},
+		{name: "test_max_profit", args: args{prices: []int{2, 7, 2, 5, 1, 8}}, want: 7},
+		{name: "test_max_profit", args: args{prices: []int{2, 1, 4}}, want: 3},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := maxProfit(tt.args.prices); got != tt.want {
+				t.Errorf("maxProfit() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 229. 多数元素 II
+func Test_majorityElement(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+
+		{name: "majority", want: []int{3}, args: args{nums: []int{3, 2, 3}}},
+		{name: "majority", want: []int{1, 2}, args: args{nums: []int{1, 2}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := majorityElementWithMor(tt.args.nums); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("majorityElement() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 169: 多数元素
+func Test_majoritElement(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "majority", want: 3, args: args{nums: []int{3, 2, 3}}},
+		{name: "majority", want: 2, args: args{nums: []int{2, 2, 1, 1, 1, 2, 2}}},
+		{name: "majority", want: 5, args: args{nums: []int{6, 5, 5}}},
+		{name: "majority", want: 3, args: args{nums: []int{3, 3, 4}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := majoritElementWithMoreV1(tt.args.nums); got != tt.want {
+				t.Errorf("majorityElement() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 14:最长公共前缀
+func Test_longestCommonPrefix(t *testing.T) {
+	type args struct {
+		strs []string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{name: "test", args: args{strs: []string{"flower", "flow", "flight"}}, want: "fl"},
+		{name: "test", args: args{strs: []string{"dog", "racecar", "car"}}, want: ""},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := longestCommonPrefix(tt.args.strs); got != tt.want {
+				t.Errorf("longestCommonPrefix() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 58:最后一个单词的长度
+func Test_lengthOfLastWord(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		//{name: "", args: args{"   fly me   to   the moon  "}, want: 4},
+		//{name: "", args: args{"Hello World"}, want: 5},
+		{name: "", args: args{"a"}, want: 1},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := lengthOfLastWord(tt.args.s); got != tt.want {
+				t.Errorf("lengthOfLastWord() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 20. 有效的括号
+func Test_isValid(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "isValid", args: args{s: ""}, want: true},
+		{name: "isValid", args: args{s: "(]"}, want: false},
+		{name: "isValid", args: args{s: "()[]{}"}, want: true},
+		{name: "isValid", args: args{s: "()"}, want: true},
+		{name: "isValid", args: args{s: "([{}])"}, want: true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isValid(tt.args.s); got != tt.want {
+				t.Errorf("isValid() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 205. 同构字符串
+func Test_isIsomorphic(t *testing.T) {
+	type args struct {
+		s string
+		t string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "isomorphic", args: args{s: "egg", t: "add"}, want: true},
+		{name: "isomorphic", args: args{s: "foo", t: "bar"}, want: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isIsomorphic(tt.args.s, tt.args.t); got != tt.want {
+				t.Errorf("isIsomorphic() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 242. 有效的字母异位词
+func Test_isAnagram(t *testing.T) {
+	type args struct {
+		s string
+		t string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "isAnagram", args: args{s: "anagram", t: "nagaram"}, want: true},
+		{name: "isAnagram", args: args{s: "rat", t: "car"}, want: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isAnagram(tt.args.s, tt.args.t); got != tt.want {
+				t.Errorf("isAnagram() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 888. 公平的糖果交换
 func Test_fairCandySwap(t *testing.T) {
 	type args struct {
