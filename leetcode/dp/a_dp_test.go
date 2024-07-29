@@ -2,6 +2,43 @@ package dp
 
 import "testing"
 
+// 1289. 下降路径最小和 II
+func Test_minFallingPathSumHard(t *testing.T) {
+	type args struct {
+		grid [][]int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		//[[-37,51,-36,34,-22],[82,4,30,14,38],[-68,-52,-92,65,-85],[-49,-3,-77,8,-19],[-60,-71,-21,-62,-73]]
+		{name: "minFallingPathSumHard", args: args{
+			grid: [][]int{
+				{-37, 51, -36, 34, -22},     // -37 0
+				{82, 4, 30, 14, 38},         // 4 1
+				{-68, -52, -92, 65, -85},    // -92 2
+				{-49, -3, -77, 8, -19},      // -49 0
+				{-60, -71, -21, -62, -73}}}, // -73 4
+			wantAns: -268},
+		{name: "minFallingPathSumHard", args: args{
+			grid: [][]int{
+				{1, 2, 3}, //
+				{4, 5, 6}, // 4 1
+				{7, 8, 9}, // -92 2
+			},
+		},
+			wantAns: 13},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := minFallingPathSumHard(tt.args.grid); gotAns != tt.wantAns {
+				t.Errorf("minFallingPathSumHard() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 931. 下降路径最小和
 func Test_minFallingPathSum(t *testing.T) {
 	type args struct {

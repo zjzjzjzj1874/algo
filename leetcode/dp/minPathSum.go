@@ -1,5 +1,7 @@
 package dp
 
+import "math"
+
 // LCR 099. 最小路径和
 // 给定一个包含非负整数的 m x n 网格 grid ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
 //
@@ -156,6 +158,62 @@ func minFallingPathSum(matrix [][]int) int {
 	ans := dp[n-1][0]
 	for i := 1; i < m; i++ {
 		ans = min(ans, dp[n-1][i])
+	}
+
+	return ans
+}
+
+// 1289. 下降路径最小和 II
+// 给你一个 n x n 整数矩阵 grid ，请你返回 非零偏移下降路径 数字和的最小值。
+//
+// 非零偏移下降路径 定义为：从 grid 数组中的每一行选择一个数字，且按顺序选出来的数字中，相邻数字不在原数组的同一列。
+//
+// 示例 1：
+//
+// 输入：grid = [[1,2,3],[4,5,6],[7,8,9]]
+// 输出：13
+// 解释：
+// 所有非零偏移下降路径包括：
+// [1,5,9], [1,5,7], [1,6,7], [1,6,8],
+// [2,4,8], [2,4,9], [2,6,7], [2,6,8],
+// [3,4,8], [3,4,9], [3,5,7], [3,5,9]
+// 下降路径中数字和最小的是 [1,5,7] ，所以答案是 13 。
+// 示例 2：
+//
+// 输入：grid = [[7]]
+// 输出：7
+//
+// 提示：
+//
+// n == grid.length == grid[i].length
+// 1 <= n <= 200
+// -99 <= grid[i][j] <= 99
+func minFallingPathSumHard(grid [][]int) (ans int) {
+	n := len(grid)
+	// 还是只能dp，因为涉及到求min
+	dp := make([][]int, n)
+	dp[0] = grid[0]
+
+	for i := 1; i < len(grid); i++ {
+		dp[i] = make([]int, n)
+
+		for j := 0; j < n; j++ {
+			// 求上一行不相邻元素最小值
+			mini := math.MaxInt
+			for k := 0; k < n; k++ {
+				if j != k && dp[i-1][k] < mini {
+					mini = dp[i-1][k]
+				}
+			}
+			dp[i][j] = grid[i][j] + mini
+		}
+	}
+
+	ans = math.MaxInt
+	for i := 0; i < n; i++ {
+		if ans > dp[n-1][i] {
+			ans = dp[n-1][i]
+		}
 	}
 
 	return ans
