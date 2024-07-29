@@ -2,6 +2,47 @@ package dp
 
 import "testing"
 
+// 2684. 矩阵中移动的最大次数
+func Test_maxMoves(t *testing.T) {
+	type args struct {
+		grid [][]int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		//[2,4,3,5],[5,4,9,3],[3,4,2,11],[10,9,13,15]
+		{name: "maxMoves", args: args{grid: [][]int{{2, 4, 3, 5}, {5, 4, 9, 3}, {3, 4, 2, 11}, {10, 9, 13, 15}}}, wantAns: 3},
+		{name: "maxMoves", args: args{grid: [][]int{{3, 2, 4}, {2, 1, 9}, {1, 1, 7}}}, wantAns: 0},
+		//,[],[],[],[]]
+		{name: "maxMoves", args: args{grid: [][]int{
+			//{187, 167, 209, 251, 152, 236, 263, 128, 135},
+			//{267, 249, 251, 285, 73,  204, 70,  207, 74},
+			//{189, 159, 235, 66,  84,  89,  153, 111, 189},
+			//{120, 81,  210, 7,   2,   231, 92,  128, 218},
+			//{193, 131, 244, 293, 284, 175, 226, 205, 245},
+			{187, 167, 209, 251, 152, 236, 263, 128, 135},
+			{267, 249, 251, 285, 73, 204, 70, 207, 74},
+			{189, 159, 235, 66, 84, 89, 153, 111, 189},
+			{120, 81, 210, 7, 2, 231, 92, 128, 218},
+			{193, 131, 244, 293, 284, 175, 226, 205, 245},
+		}}, wantAns: 3},
+		// [0 0 2 3 0 5 6 7 8]
+		// [0 1 2 3 4 5 0 7 0]
+		// [0 1 2 0 4 5 6 7 8]
+		// [0 0 2 0 0 5 6 7 8]
+		// [0 1 2 3 4 5 6 7 8]
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := maxMoves(tt.args.grid); gotAns != tt.wantAns {
+				t.Errorf("maxMoves() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 1289. 下降路径最小和 II
 func Test_minFallingPathSumHard(t *testing.T) {
 	type args struct {
