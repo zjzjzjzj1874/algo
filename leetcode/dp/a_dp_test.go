@@ -2,6 +2,27 @@ package dp
 
 import "testing"
 
+// 931. 下降路径最小和
+func Test_minFallingPathSum(t *testing.T) {
+	type args struct {
+		matrix [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "minFallingPathSum", args: args{matrix: [][]int{{2, 1, 3}, {6, 5, 4}, {7, 8, 9}}}, want: 13},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := minFallingPathSum(tt.args.matrix); got != tt.want {
+				t.Errorf("minFallingPathSum() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // LCR 100. 三角形最小路径和
 func Test_minimumTotal(t *testing.T) {
 	type args struct {

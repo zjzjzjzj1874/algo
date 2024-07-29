@@ -70,6 +70,7 @@ func minPathSum(grid [][]int) int {
 // 0 < frame[0].length <= 200
 
 // 解题：这个题和上面一模一样，不过一个是求最大值，一个是求最小值
+// 这个优化解题可以看一下：https://leetcode.cn/problems/li-wu-de-zui-da-jie-zhi-lcof/solutions/2153802/jiao-ni-yi-bu-bu-si-kao-dpcong-hui-su-da-epvl/
 func jewelleryValue(frame [][]int) int {
 	// 这个题和机器人走路一模一样的，不过一个求最大，一个求最小
 	// 1  3  1
@@ -102,4 +103,60 @@ func jewelleryValue(frame [][]int) int {
 	}
 
 	return dp[n-1][m-1]
+}
+
+// 931. 下降路径最小和
+// 给你一个 n x n 的 方形 整数数组 matrix ，请你找出并返回通过 matrix 的下降路径 的 最小和 。
+//
+// 下降路径 可以从第一行中的任何元素开始，并从每一行中选择一个元素。在下一行选择的元素和当前行所选元素最多相隔一列（即位于正下方或者沿对角线向左或者向右的第一个元素）。具体来说，位置 (row, col) 的下一个元素应当是 (row + 1, col - 1)、(row + 1, col) 或者 (row + 1, col + 1) 。
+//
+// 示例 1：
+//
+// 输入：matrix = [[2,1,3],[6,5,4],[7,8,9]]
+// 输出：13
+// 解释：如图所示，为和最小的两条下降路径
+// 示例 2：
+//
+// 输入：matrix = [[-19,57],[-40,-5]]
+// 输出：-59
+// 解释：如图所示，为和最小的下降路径
+//
+// 提示：
+//
+// n == matrix.length == matrix[i].length
+// 1 <= n <= 100
+// -100 <= matrix[i][j] <= 100
+func minFallingPathSum(matrix [][]int) int {
+	// 走 i,j => i+1,j || i, j+1 || i+1, j+1
+	// dp[0][i] = matrix[0][i]
+	// dp[i][0] = dp[i-1][0] + matrix[i][0]
+	// dp[i][j] = matrix[i][j] + min(dp[i-1][j], dp[i-1][j+1], dp[i-1][j-1])
+
+	n := len(matrix)    // 行，row
+	m := len(matrix[0]) // 列， col
+	dp := make([][]int, n)
+
+	dp[0] = matrix[0]
+	for i := 1; i < n; i++ {
+		dp[i] = make([]int, m)
+	}
+
+	for i := 1; i < n; i++ {
+		for j := 0; j < m; j++ {
+			if j == 0 {
+				dp[i][j] = matrix[i][j] + min(dp[i-1][j], dp[i-1][j+1])
+			} else if j < m-1 {
+				dp[i][j] = matrix[i][j] + min(dp[i-1][j], dp[i-1][j+1], dp[i-1][j-1])
+			} else {
+				dp[i][j] = matrix[i][j] + min(dp[i-1][j], dp[i-1][j-1])
+			}
+		}
+	}
+
+	ans := dp[n-1][0]
+	for i := 1; i < m; i++ {
+		ans = min(ans, dp[n-1][i])
+	}
+
+	return ans
 }
