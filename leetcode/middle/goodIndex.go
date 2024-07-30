@@ -33,7 +33,7 @@ package middle
 // 1 <= ai, bi, ci, mi <= 103
 // 0 <= target <= 103
 
-// 解题：更快的做法是用快速幂，请看【图解】一张图秒懂快速幂。 TODO 弄懂取模和快速幂
+// 解题：更快的做法是用快速幂，请看【图解】一张图秒懂快速幂。 TODO 弄懂取模和快速幂 =》 https://leetcode.cn/circle/discuss/mDfnkW/
 // 本题还需要取模，如果你不知道如何正确地取模，请看 模运算的世界：当加减乘除遇上取模。
 func getGoodIndices(variables [][]int, target int) (ans []int) {
 	for i, v := range variables {
