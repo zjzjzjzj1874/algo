@@ -113,4 +113,15 @@ func TestNumArray_SumRange(t *testing.T) {
 		a.Update(1, 2)
 		fmt.Println(a.SumRange(0, 2))
 	})
+
+	// LCR 013. 二维区域和检索 - 矩阵不可变
+	t.Run("LCR 013. 二维区域和检索 - 数组可修改", func(t *testing.T) {
+
+		a := ConstructorRegion([][]int{{-1}})
+		fmt.Println(a.SumRegion(0, 0, 0, 0))
+		//a := ConstructorRegion([][]int{{3, 0, 1, 4, 2}, {5, 6, 3, 2, 1}, {1, 2, 0, 1, 5}, {4, 1, 0, 1, 7}, {1, 0, 3, 0, 5}})
+		//fmt.Println(a.SumRegion(2, 1, 4, 3))
+		//fmt.Println(a.SumRegion(1, 1, 2, 2))
+		//fmt.Println(a.SumRegion(1, 2, 2, 4))
+	})
 }
