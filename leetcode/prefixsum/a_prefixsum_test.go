@@ -5,6 +5,27 @@ import (
 	"testing"
 )
 
+// LCR 011. 连续数组
+func Test_findMaxLength(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "findMaxLength", args: args{nums: []int{0, 1}}, wantAns: 2},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := findMaxLength(tt.args.nums); gotAns != tt.wantAns {
+				t.Errorf("findMaxLength() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 523. 连续的子数组和
 func Test_checkSubArraySum(t *testing.T) {
 	type args struct {
