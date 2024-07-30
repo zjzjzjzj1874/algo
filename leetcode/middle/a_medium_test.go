@@ -6,6 +6,34 @@ import (
 	"testing"
 )
 
+// 2961. 双模幂运算
+func Test_getGoodIndices(t *testing.T) {
+	type args struct {
+		variables [][]int
+		target    int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns []int
+	}{
+		{name: "getGoodIndices", args: args{
+			variables: [][]int{
+				{30, 5, 43, 2}, {15, 50, 35, 41}, {45, 34, 41, 32}, {14, 37, 33, 13},
+				{6, 8, 1, 53}, {37, 1, 12, 52}, {42, 37, 2, 52}, {9, 2, 15, 3},
+				{31, 12, 21, 24}, {52, 24, 6, 12}, {51, 35, 21, 52}, {30, 18, 10, 2}},
+			target: 1},
+			wantAns: []int{5, 7, 8, 10}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := getGoodIndices(tt.args.variables, tt.args.target); !reflect.DeepEqual(gotAns, tt.wantAns) {
+				t.Errorf("getGoodIndices() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 1093. 大样本统计
 func Test_sampleStatsOverMem(t *testing.T) {
 	type args struct {
