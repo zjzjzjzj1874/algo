@@ -1,9 +1,252 @@
 package easy
 
 import (
+	"fmt"
 	"reflect"
+	"sort"
 	"testing"
 )
+
+// LCR 001. 两数相除
+func Test_divide(t *testing.T) {
+	type args struct {
+		a int
+		b int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "divide", args: args{a: 15, b: 2}, want: 7},
+		{name: "divide", args: args{a: 2, b: 2}, want: 1},
+		{name: "divide", args: args{a: 7, b: -3}, want: -2},
+		{name: "divide", args: args{a: -2147483648, b: -1}, want: 2147483647},
+		{name: "divide", args: args{a: -2147483648, b: 4}, want: -536870912},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := divide(tt.args.a, tt.args.b); got != tt.want {
+				t.Errorf("divide() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 3. 罗马数字转整数
+func Test_romanToInt(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "romanToInt", args: args{s: "IX"}, want: 9},
+		{name: "romanToInt", args: args{s: "LVIII"}, want: 58},
+		{name: "romanToInt", args: args{s: "MCMXCIV"}, want: 1994},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := romanToInt(tt.args.s); got != tt.want {
+				t.Errorf("romanToInt() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 290. 单词规律
+func Test_wordPattern(t *testing.T) {
+	type args struct {
+		pattern string
+		s       string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "wordPattern", args: args{pattern: "abba", s: "dog cat cat dog"}, want: true},
+		{name: "wordPattern", args: args{pattern: "abba", s: "dog cat cat fish"}, want: false},
+		{name: "wordPattern", args: args{pattern: "abba", s: "dog dog dog dog"}, want: true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := wordPattern(tt.args.pattern, tt.args.s); got != tt.want {
+				t.Errorf("wordPattern() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 1. 两数之和
+func TestTwoSum(t *testing.T) {
+	nums := []int{2, 7, 11, 15}
+	target := 9
+	fmt.Println(twosumTwoPtr(nums, target))
+
+	//nums = []int{3, 2, 4}
+	//target = 6
+	//fmt.Println("twosumHash == ", twosumHash(nums, target))
+
+	nums = []int{3, 3}
+	target = 6
+	bubbleRes := twosumBubble(nums, target)
+	hashRes := twosumHash(nums, target)
+	sort.Ints(bubbleRes)
+	sort.Ints(hashRes)
+	fmt.Printf("bubbleRes = %v, hashRes = %v,equal = %v", bubbleRes, hashRes, reflect.DeepEqual(bubbleRes, hashRes))
+}
+
+func Test_twosumHash(t *testing.T) {
+	type args struct {
+		arr    []int
+		target int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{name: "twosum", args: args{arr: []int{2, 7, 11, 15}, target: 9}, want: []int{0, 1}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := twosumHash(tt.args.arr, tt.args.target); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("twosumHash() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 28. 找出字符串中第一个匹配项的下标
+func Test_strStr(t *testing.T) {
+	type args struct {
+		haystack string
+		needle   string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		//{name: "hello", args: args{haystack: "hello", needle: "hello"}, want: 0},
+		//{name: "hello", args: args{haystack: "butsad", needle: "sad"}, want: 3},
+		{name: "hello", args: args{haystack: "BBC ABCDABABCDABCDABDE", needle: "ABCDABD"}, want: 14},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := strStrWithKMP(tt.args.haystack, tt.args.needle); got != tt.want {
+				t.Errorf("strStr() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 136. 只出现一次的数字
+func Test_singleNumber(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "singleNumber", args: args{nums: []int{2, 2, 1}}, want: 1},
+		{name: "singleNumber", args: args{nums: []int{4, 1, 2, 2, 1}}, want: 4},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := singleNumber(tt.args.nums); got != tt.want {
+				t.Errorf("singleNumber() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 27. 原地移除元素
+func TestRemoveElement(t *testing.T) {
+	nums := []int{3, 2, 2, 3}
+	val := 3
+	fmt.Printf("nums = %v,res = %d\n", nums, removeElement(nums, val))
+}
+
+// 26. 删除有序数组中的重复项
+func TestRemoveDuplicate(t *testing.T) {
+	nums := []int{1, 1, 2}
+	fmt.Printf("nums = %v,res = %d\n", nums, removeDuplicates(nums))
+
+	nums = []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}
+	fmt.Printf("nums = %v,res = %d\n", nums, removeDuplicates(nums))
+}
+
+// 392. 判断子序列
+func Test_isSubsequence(t *testing.T) {
+	type args struct {
+		s string
+		t string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "isSubsequence", args: args{s: "abc", t: "ahbgdc"}, want: true},
+		{name: "isSubsequence", args: args{s: "axc", t: "ahbgdc"}, want: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isSubsequence(tt.args.s, tt.args.t); got != tt.want {
+				t.Errorf("isSubsequence() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 125. 验证回文串
+func Test_isPalindrome(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "isPalindrome", args: args{s: "A man, a plan, a canal: Panama"}, want: true},
+		{name: "isPalindrome", args: args{s: "race a car"}, want: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isPalindromeWithO1(tt.args.s); got != tt.want {
+				t.Errorf("isPalindrome() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 9. 回文数
+func Test_isPalindromeWithNum(t *testing.T) {
+	type args struct {
+		x int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "isPalindromeWith", args: args{x: 12321}, want: true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isPalindromeWithNum(tt.args.x); got != tt.want {
+				t.Errorf("isPalindromeWithNum() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
 
 // 283. 移动零
 func Test_moveZeroes(t *testing.T) {
