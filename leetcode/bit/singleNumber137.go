@@ -1,4 +1,4 @@
-package middle
+package bit
 
 // 137. 只出现一次的数字 II
 // 给你一个整数数组 nums ，除某个元素仅出现 一次 外，其余每个元素都恰出现 三次 。请你找出并返回那个只出现了一次的元素。
@@ -35,4 +35,18 @@ func singleNumber137(nums []int) int {
 	}
 
 	return -1
+}
+
+func singleNumber137WithBit(nums []int) int {
+	ans := int32(0) // 最后要求的数字
+	for i := 0; i < 32; i++ {
+		carry := int32(0)
+		for _, num := range nums {
+			carry += int32(num) >> i & 1 // 统计[0-32)上出现0，1的次数
+		}
+
+		ans += carry % 3 << i // 还原对应I的数字
+	}
+
+	return int(ans)
 }

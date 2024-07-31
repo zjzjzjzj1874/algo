@@ -1,4 +1,4 @@
-package middle
+package bit
 
 // 260. 只出现一次的数字 III
 // 给你一个整数数组 nums，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。你可以按 任意顺序 返回答案。
@@ -26,7 +26,7 @@ package middle
 // 除两个只出现一次的整数外，nums 中的其他数字都出现两次
 
 // 解题：位运算
-func singleNumber(nums []int) []int {
+func singleNumber260(nums []int) []int {
 	ab := 0
 
 	for _, num := range nums {

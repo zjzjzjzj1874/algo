@@ -3,6 +3,7 @@ package easy
 import "fmt"
 
 // 67. 二进制求和
+// LCR 002. 二进制求和
 // 给你两个二进制字符串 a 和 b ，以二进制字符串的形式返回它们的和。
 //
 // 示例 1：
@@ -49,4 +50,38 @@ func addBinary(a string, b string) string {
 	}
 
 	return res
+}
+func addBinaryLCR(a string, b string) string {
+	la := len(a)
+	lb := len(b)
+	n := la // 找最长的字符串
+	if la < lb {
+		n = lb
+	}
+
+	res := make([]string, n)
+	carry := 0 // 是否进位
+	for i := 0; i < n; i++ {
+		ba := 0
+		bb := 0
+		if i < la && a[la-i-1] == '1' {
+			ba = 1
+		}
+		if i < lb && b[lb-i-1] == '1' {
+			bb = 1
+		}
+
+		res[n-1-i] = fmt.Sprintf("%v", (carry+ba+bb)%2)
+		carry = (carry + ba + bb) / 2
+	}
+
+	ans := ""
+	if carry > 0 {
+		ans = "1"
+	}
+	for i := range res {
+		ans += res[i]
+	}
+
+	return ans
 }
