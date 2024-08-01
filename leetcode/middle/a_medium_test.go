@@ -6,6 +6,42 @@ import (
 	"testing"
 )
 
+// LCP 40. 心算挑战
+func Test_maxmiumScore(t *testing.T) {
+	type args struct {
+		cards []int
+		cnt   int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "maxmiumScore", args: args{cards: []int{1, 2, 8, 9}, cnt: 3}, want: 18},
+		{name: "maxmiumScore", args: args{cards: []int{13, 12, 10, 19, 19, 4, 16, 10, 2, 9, 2, 13, 13, 15, 5, 19, 3, 13, 17, 4, 18,
+			19, 8, 1, 19, 18, 17, 14, 6, 9, 6, 11, 4, 1, 16, 6, 19, 15, 20, 18, 2, 14, 17, 9, 13, 15, 1, 11, 20, 15, 18, 17, 12, 20,
+			11, 14, 7, 1, 8, 12, 19, 17, 11, 17, 19, 14, 7, 20, 3, 3, 5, 5, 18, 15, 6, 15, 7, 7, 1, 17, 3, 5, 7, 12, 13, 18, 13, 17,
+			20, 5, 15, 10, 11, 19, 1, 16, 18}, cnt: 9}, want: 176},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := maxmiumScore(tt.args.cards, tt.args.cnt); got != tt.want {
+				t.Errorf("maxmiumScore() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+
+	//t.Run("#奇偶性判断", func(t *testing.T) {
+	//	var i int
+	//	i = 3
+	//	fmt.Println(i & 1)
+	//	fmt.Println(i % 2)
+	//	i = 4
+	//	fmt.Println(i & 1)
+	//	fmt.Println(i % 2)
+	//})
+}
+
 // 2961. 双模幂运算
 func Test_getGoodIndices(t *testing.T) {
 	type args struct {
