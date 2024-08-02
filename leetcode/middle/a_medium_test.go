@@ -6,6 +6,27 @@ import (
 	"testing"
 )
 
+// 2125. 银行中的激光束数量
+func Test_numberOfBeams(t *testing.T) {
+	type args struct {
+		bank []string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "numberOfBeams", args: args{bank: []string{"011001", "000000", "010100", "001000"}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := numberOfBeams(tt.args.bank); got != tt.want {
+				t.Errorf("numberOfBeams() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 73. 矩阵置零
 func Test_setZeroes(t *testing.T) {
 	type args struct {
