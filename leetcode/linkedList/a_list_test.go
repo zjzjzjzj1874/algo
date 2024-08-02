@@ -5,6 +5,78 @@ import (
 	"testing"
 )
 
+// 24. 两两交换链表中的节点
+func Test_swapPairs(t *testing.T) {
+	type args struct {
+		head *ListNode
+	}
+	tests := []struct {
+		name string
+		args args
+		want *ListNode
+	}{
+		{name: "swap", args: args{head: &ListNode{
+			Val: 1,
+			Next: &ListNode{
+				Val: 2,
+				Next: &ListNode{
+					Val: 3,
+					Next: &ListNode{
+						Val:  4,
+						Next: nil,
+					},
+				},
+			},
+		}}, want: &ListNode{
+			Val: 2,
+			Next: &ListNode{
+				Val: 1,
+				Next: &ListNode{
+					Val: 4,
+					Next: &ListNode{
+						Val:  3,
+						Next: nil,
+					},
+				},
+			},
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := swapPairs(tt.args.head); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("swapPairs() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// LCR 029. 循环有序列表的插入
+func Test_insert(t *testing.T) {
+	type args struct {
+		aNode *Node
+		x     int
+	}
+
+	a := &Node{Val: 3}
+	a.Next = &Node{Val: 3}
+	a.Next.Next = &Node{Val: 3}
+	a.Next.Next.Next = a
+	tests := []struct {
+		name string
+		args args
+		want *Node
+	}{
+		{name: "insert", args: args{aNode: a, x: 0}, want: &Node{}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := insert(tt.args.aNode, tt.args.x); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("insert() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 445. 两数相加 II
 func Test_addTwoNumbers(t *testing.T) {
 	type args struct {

@@ -6,6 +6,140 @@ import (
 	"testing"
 )
 
+// 73. 矩阵置零
+func Test_setZeroes(t *testing.T) {
+	type args struct {
+		matrix [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+	}{
+		//输入：[1,1,1],[1,0,1],[1,1,1]
+		//输出：[1,0,1],[0,0,0],[1,0,1]
+		{name: "setZeros", args: args{matrix: [][]int{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			setZeroes(tt.args.matrix)
+		})
+	}
+	t.Run("#BitShift", func(t *testing.T) {
+		fmt.Println(1 << 32)
+	})
+}
+
+// 560. 和为 K 的子数组
+func Test_subarraySum(t *testing.T) {
+	type args struct {
+		nums []int
+		k    int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		//{name: "", args: args{nums: []int{1, 1, 1}, k: 2}, want: 2},
+		//{name: "", args: args{nums: []int{1, 2, 3}, k: 3}, want: 2},
+		{name: "", args: args{nums: []int{3, 4, 7, 2, -3, 1, 4, 2}, k: 7}, want: 4},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := subarraySumV1(tt.args.nums, tt.args.k); got != tt.want {
+				t.Errorf("subarraySum() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 75. 颜色分类
+func Test_sortColors(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+	}{
+		{name: "sortColors", args: args{nums: []int{2, 0, 2, 1, 1, 0}}},
+		{name: "sortColors", args: args{nums: []int{2, 0, 1}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			sortColors(tt.args.nums)
+		})
+	}
+}
+
+// 求小和问题
+func Test_smallSum(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "small sum", args: args{nums: []int{1, 3, 4, 2, 5}}, want: 16},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := smallSum(tt.args.nums); got != tt.want {
+				t.Errorf("smallSum() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 34. 在排序数组中查找元素的第一个和最后一个位置
+func Test_searchRange(t *testing.T) {
+	type args struct {
+		nums   []int
+		target int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{name: "searchRange", args: args{nums: []int{5, 7, 7, 8, 8, 10}, target: 8}, want: []int{3, 4}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := searchRange(tt.args.nums, tt.args.target); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("searchRange() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 33. 搜索旋转排序数组
+func Test_search(t *testing.T) {
+	type args struct {
+		nums   []int
+		target int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "search", args: args{nums: []int{4, 5, 6, 7, 0, 1, 2}, target: 0}, want: 4},
+		{name: "search", args: args{nums: []int{1}, target: 0}, want: -1},
+		{name: "search", args: args{nums: []int{5, 1, 2, 3, 4}, target: 1}, want: 1},
+		{name: "search", args: args{nums: []int{8, 1, 2, 3, 4, 5, 6, 7}, target: 6}, want: 6},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := search(tt.args.nums, tt.args.target); got != tt.want {
+				t.Errorf("search() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 289. 生命游戏
 func Test_gameOfLife(t *testing.T) {
 	type args struct {
