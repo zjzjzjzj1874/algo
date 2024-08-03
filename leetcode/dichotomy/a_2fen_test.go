@@ -5,6 +5,30 @@ import (
 	"testing"
 )
 
+// 69. x 的平方根
+func Test_mySqrt(t *testing.T) {
+	type args struct {
+		x int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "mySqrt", args: args{x: 0}, want: 0},
+		{name: "mySqrt", args: args{x: 3}, want: 1},
+		{name: "mySqrt", args: args{x: 4}, want: 2},
+		{name: "mySqrt", args: args{x: 8}, want: 2},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := mySqrt(tt.args.x); got != tt.want {
+				t.Errorf("mySqrt() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // LCR 069. 山脉数组的峰顶索引
 func Test_peakIndexInMountainArray(t *testing.T) {
 	type args struct {
