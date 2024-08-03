@@ -1,5 +1,7 @@
 package dp
 
+import "math"
+
 // 1884. 鸡蛋掉落-两枚鸡蛋
 // 给你 2 枚相同 的鸡蛋，和一栋从第 1 层到第 n 层共有 n 层楼的建筑。
 //
@@ -43,4 +45,41 @@ func twoEggDrop(n int) int {
 	}
 
 	return times
+}
+
+// 887. 鸡蛋掉落
+// 太难了，战术性放弃 TODO 答案是不对的
+func superEggDrop(k int, n int) (ans int) {
+	// 分情况讨论，如果k=1,ans = n
+	// k = 2,参考上一个鸡蛋掉落的问题，
+	// 如果k>2，此时可以使用二分缩小范围
+	// 如果2^k > n,直接返回log(n)
+
+	if math.Pow(2, float64(k)) == float64(n) {
+		ans += k
+		return
+	} else if math.Pow(2, float64(k)) > float64(n) {
+		for math.Pow(2, float64(k)) >= float64(n) {
+			k--
+		}
+		ans += k
+		return
+	}
+	var egg func(k, n int)
+	egg = func(k, n int) {
+		if k == 1 {
+			ans += n
+			return
+		}
+		if k == 2 {
+			ans += twoEggDrop(n)
+			return
+		}
+
+		ans++
+		egg(k-1, n/2)
+	}
+
+	egg(k, n)
+	return
 }
