@@ -2,6 +2,23 @@ package math
 
 import "testing"
 
+// 470. 用 Rand7() 实现 Rand10()
+func Test_rand10(t *testing.T) {
+	tests := []struct {
+		name    string
+		wantAns int
+	}{
+		{name: "rand10", wantAns: 10},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := rand10(); gotAns > tt.wantAns {
+				t.Errorf("rand10() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 292. Nim 游戏
 func Test_canWinNim(t *testing.T) {
 	type args struct {
