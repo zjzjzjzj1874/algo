@@ -2,6 +2,29 @@ package zuo
 
 import "testing"
 
+// 最小染色
+func Test_minPaint(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "minPaint", args: args{s: "RGRGR" /*RRRGG*/}, wantAns: 2},
+		{name: "minPaint", args: args{s: "RGGGRGGRGRRGRRGR" /*RRRGG*/}, wantAns: 7},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := minPaintWithON(tt.args.s); gotAns != tt.wantAns {
+				//if gotAns := minPaint(tt.args.s); gotAns != tt.wantAns {
+				t.Errorf("minPaint() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 最小带子数量
 func Test_minBagNumber(t *testing.T) {
 	type args struct {
