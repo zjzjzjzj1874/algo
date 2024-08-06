@@ -2,6 +2,32 @@ package math
 
 import "testing"
 
+// 1201. 丑数 III
+func Test_nthUglyNumber(t *testing.T) {
+	type args struct {
+		n int
+		a int
+		b int
+		c int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "uglyNumber", args: args{n: 3, a: 2, b: 3, c: 5}, want: 4},
+		{name: "uglyNumber", args: args{n: 7, a: 7, b: 7, c: 7}, want: 49},
+		{name: "uglyNumber", args: args{n: 1000000000, a: 2, b: 217983653, c: 336916467}, want: 1999999984},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := nthUglyNumber(tt.args.n, tt.args.a, tt.args.b, tt.args.c); got != tt.want {
+				t.Errorf("nthUglyNumber() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 470. 用 Rand7() 实现 Rand10()
 func Test_rand10(t *testing.T) {
 	tests := []struct {
