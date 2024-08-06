@@ -2,6 +2,28 @@ package math
 
 import "testing"
 
+// 2769. 找出最大的可达成数字
+func Test_theMaximumAchievableX(t *testing.T) {
+	type args struct {
+		num int
+		t   int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "theMaximumAchievableX", args: args{num: 4, t: 1}, want: 6},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := theMaximumAchievableX(tt.args.num, tt.args.t); got != tt.want {
+				t.Errorf("theMaximumAchievableX() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 1201. 丑数 III
 func Test_nthUglyNumber(t *testing.T) {
 	type args struct {
