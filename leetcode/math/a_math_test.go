@@ -2,6 +2,29 @@ package math
 
 import "testing"
 
+// 202. 快乐数
+func Test_isHappy(t *testing.T) {
+	type args struct {
+		n int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "happy", args: args{n: 19}, want: true},
+		{name: "happy", args: args{n: 2}, want: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isHappyWithTwoPtr(tt.args.n); got != tt.want {
+				//if got := isHappy(tt.args.n); got != tt.want {
+				t.Errorf("isHappy() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 840. 矩阵中的幻方
 func Test_numMagicSquaresInside(t *testing.T) {
 	type args struct {
