@@ -73,6 +73,53 @@ func nthUglyNumber(n int, a int, b int, c int) int {
 	return floor
 }
 
+// 264. 丑数 II
+// 给你一个整数 n ，请你找出并返回第 n 个 丑数 。
+//
+// 丑数 就是质因子只包含 2、3 和 5 的正整数。
+//
+// 示例 1：
+//
+// 输入：n = 10
+// 输出：12
+// 解释：[1, 2, 3, 4, 5, 6, 8, 9, 10, 12] 是由前 10 个丑数组成的序列。
+// 示例 2：
+//
+// 输入：n = 1
+// 输出：1
+// 解释：1 通常被视为丑数。
+//
+// 提示：
+//
+// 1 <= n <= 1690
+func nthUglyNumberII(n int) int {
+	if n == 1 {
+		return 1
+	}
+	// 先用[]int{}的数组来装n；一会儿使用O(1)优化
+	dp := make([]int, n+1)
+	dp[1] = 1          // 初始化
+	i, j, k := 1, 1, 1 // 分别表示对应2,3,5的指针
+
+	for m := 2; m <= n; m++ {
+		ia := dp[i] * 2
+		jb := dp[j] * 3
+		kc := dp[k] * 5
+		dp[m] = min(ia, jb, kc)
+		if dp[m] == ia {
+			i++
+		}
+		if dp[m] == jb {
+			j++
+		}
+		if dp[m] == kc {
+			k++
+		}
+	}
+
+	return dp[n]
+}
+
 // 解题：暴力尝试：O(N):会超时
 func nthUglyNumberTimeout(n int, a int, b int, c int) int {
 	if a == 1 || b == 1 || c == 1 {
