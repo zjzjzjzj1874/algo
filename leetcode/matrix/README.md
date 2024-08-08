@@ -5,3 +5,4 @@
 * [54. 螺旋矩阵](https://leetcode.cn/problems/spiral-matrix/description/)
 * [59. 螺旋矩阵II](https://leetcode.cn/problems/spiral-matrix-ii/description/)
 * [885. 螺旋矩阵 III](https://leetcode.cn/problems/spiral-matrix-iii/description/)
+* [2326. 螺旋矩阵 IV](https://leetcode.cn/problems/spiral-matrix-iv/solutions/)
