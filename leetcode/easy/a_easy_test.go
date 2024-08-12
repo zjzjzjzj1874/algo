@@ -7,6 +7,28 @@ import (
 	"testing"
 )
 
+// 605. 种花问题
+func Test_canPlaceFlowers(t *testing.T) {
+	type args struct {
+		flowerbed []int
+		n         int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "canPlaceFlowers", args: args{flowerbed: nil, n: 0}, want: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := canPlaceFlowers(tt.args.flowerbed, tt.args.n); got != tt.want {
+				t.Errorf("canPlaceFlowers() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // LCR 001. 两数相除
 func Test_divide(t *testing.T) {
 	type args struct {
