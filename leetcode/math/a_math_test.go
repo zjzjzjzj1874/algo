@@ -2,6 +2,29 @@ package math
 
 import "testing"
 
+// 1071. 字符串的最大公因子
+func Test_gcdOfStrings(t *testing.T) {
+	type args struct {
+		s string
+		t string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{name: "gcdOfStr", args: args{s: "ABABAB", t: "ABAB"}, want: "AB"},
+		{name: "gcdOfStr", args: args{s: "TAUXXTAUXXTAUXXTAUXXTAUXX", t: "TAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXX"}, want: "TAUXX"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := gcdOfStrings(tt.args.s, tt.args.t); got != tt.want {
+				t.Errorf("gcdOfStrings() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 204. 计数质数
 func Test_countPrimes(t *testing.T) {
 	type args struct {
