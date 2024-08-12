@@ -2,6 +2,27 @@ package math
 
 import "testing"
 
+// 2521. 数组乘积中的不同质因数数目
+func Test_distinctPrimeFactors(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "distinct prime factors", args: args{nums: []int{2, 4, 3, 7, 10, 6}}, want: 4},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := distinctPrimeFactors(tt.args.nums); got != tt.want {
+				t.Errorf("distinctPrimeFactors() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 1071. 字符串的最大公因子
 func Test_gcdOfStrings(t *testing.T) {
 	type args struct {

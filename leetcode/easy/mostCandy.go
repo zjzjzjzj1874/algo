@@ -34,9 +34,24 @@ import "slices"
 // 1 <= extraCandies <= 50
 func kidsWithCandies(candies []int, extraCandies int) (ans []bool) {
 	maxN := slices.Max(candies)
+
 	ans = make([]bool, len(candies))
 	for i, num := range candies {
 		if num+extraCandies >= maxN {
+			ans[i] = true
+		}
+	}
+
+	return
+}
+
+// 解题：减少运算次数
+func kidsWithCandiesWithLessCal(candies []int, extraCandies int) (ans []bool) {
+	diff := slices.Max(candies) - extraCandies // 提前计算出最大值和额外糖果的差值 => 只要拥有数量>=此值的都可以
+
+	ans = make([]bool, len(candies))
+	for i, num := range candies {
+		if num >= diff {
 			ans[i] = true
 		}
 	}
