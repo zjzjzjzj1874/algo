@@ -2,8 +2,33 @@ package prefixsum
 
 import (
 	"fmt"
+	"reflect"
 	"testing"
 )
+
+// 3152. 特殊数组 II
+func Test_isArraySpecial(t *testing.T) {
+	type args struct {
+		nums    []int
+		queries [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []bool
+	}{
+		{name: "isArraySpecial", args: args{nums: []int{4, 3, 1, 6}, queries: [][]int{{0, 2}, {2, 3}}}, want: []bool{false, true}},
+		{name: "isArraySpecial", args: args{nums: []int{3, 4, 1, 2, 6}, queries: [][]int{{0, 4}}}, want: []bool{false}},
+		{name: "isArraySpecial", args: args{nums: []int{3, 4, 0, 2, 6}, queries: [][]int{{0, 4}}}, want: []bool{false}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isArraySpecial(tt.args.nums, tt.args.queries); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("isArraySpecial() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
 
 // LCR 011. 连续数组
 func Test_findMaxLength(t *testing.T) {
