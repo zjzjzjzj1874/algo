@@ -2,6 +2,27 @@ package slidingWindow
 
 import "testing"
 
+// 2414. 最长的字母序连续子字符串的长度
+func Test_longestContinuousSubstring(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "longestContinuousSubstring", args: args{s: "abcde"}, wantAns: 5},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := longestContinuousSubstring(tt.args.s); gotAns != tt.wantAns {
+				t.Errorf("longestContinuousSubstring() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 1423. 可获得的最大点数
 func Test_maxScore(t *testing.T) {
 	type args struct {
