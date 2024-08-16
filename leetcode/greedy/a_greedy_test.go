@@ -2,6 +2,30 @@ package greedy
 
 import "testing"
 
+// 1647. 字符频次唯一的最小删除次数
+func Test_minDeletions(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "minDeletions", args: args{s: "ceabaacb"}, wantAns: 2},
+		{name: "minDeletions", args: args{s: "aaabbbcc"}, wantAns: 2},
+		{name: "minDeletions", args: args{s: "abcabc"}, wantAns: 3},
+		{name: "minDeletions", args: args{s: "bbcebab"}, wantAns: 2},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := minDeletions(tt.args.s); gotAns != tt.wantAns {
+				t.Errorf("minDeletions() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 2091. 从数组中移除最大值和最小值
 func Test_minimumDeletions(t *testing.T) {
 	type args struct {
