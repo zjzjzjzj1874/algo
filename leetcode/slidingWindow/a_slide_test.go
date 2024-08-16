@@ -2,6 +2,28 @@ package slidingWindow
 
 import "testing"
 
+// 2379. 得到 K 个黑块的最少涂色次数
+func Test_minimumRecolors(t *testing.T) {
+	type args struct {
+		blocks string
+		k      int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "minimumRecolors", args: args{blocks: "WBBWWBBWBW", k: 7}, wantAns: 3},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := minimumRecolors(tt.args.blocks, tt.args.k); gotAns != tt.wantAns {
+				t.Errorf("minimumRecolors() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 1456. 定长子串中元音的最大数目
 func Test_maxVowels(t *testing.T) {
 	type args struct {
