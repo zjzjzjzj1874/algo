@@ -2,6 +2,28 @@ package slidingWindow
 
 import "testing"
 
+// 1759. 统计同质子字符串的数目
+func Test_countHomogenous(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "count", args: args{s: "zzzzz"}, wantAns: 15},
+		{name: "count", args: args{s: "abbcccaa"}, wantAns: 13},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := countHomogenous(tt.args.s); gotAns != tt.wantAns {
+				t.Errorf("countHomogenous() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 2414. 最长的字母序连续子字符串的长度
 func Test_longestContinuousSubstring(t *testing.T) {
 	type args struct {
