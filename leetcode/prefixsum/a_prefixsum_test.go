@@ -6,6 +6,28 @@ import (
 	"testing"
 )
 
+// 485. 最大连续 1 的个数
+func Test_findMaxConsecutiveOnes(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "findMaxConsecutiveOnes", args: args{nums: []int{1, 1, 0, 1, 1, 1}}, wantAns: 3},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := findMaxConsecutiveOnesWithOne(tt.args.nums); gotAns != tt.wantAns {
+				//if gotAns := findMaxConsecutiveOnes(tt.args.nums); gotAns != tt.wantAns {
+				t.Errorf("findMaxConsecutiveOnes() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 1004. 最大连续1的个数 III
 func Test_longestOnes(t *testing.T) {
 	type args struct {

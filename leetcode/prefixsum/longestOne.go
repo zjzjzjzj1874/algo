@@ -40,3 +40,53 @@ func longestOnes(nums []int, k int) (ans int) {
 
 	return
 }
+
+// 485. 最大连续 1 的个数
+// 给定一个二进制数组 nums ， 计算其中最大连续 1 的个数。
+//
+// 示例 1：
+//
+// 输入：nums = [1,1,0,1,1,1]
+// 输出：3
+// 解释：开头的两位和最后的三位都是连续 1 ，所以最大连续 1 的个数是 3.
+// 示例 2:
+//
+// 输入：nums = [1,0,1,1,0,1]
+// 输出：2
+//
+// 提示：
+//
+// 1 <= nums.length <= 105
+// nums[i] 不是 0 就是 1.
+func findMaxConsecutiveOnes(nums []int) (ans int) {
+	// 解题：左右滑窗+前缀和
+	l := 0
+	sum := 0
+	for r, num := range nums {
+		sum += 1 - num
+
+		for sum > 0 {
+			sum -= 1 - nums[l]
+			l++
+		}
+
+		ans = max(ans, r-l+1)
+	}
+
+	return
+}
+
+// 解题：一次遍历，计算
+func findMaxConsecutiveOnesWithOne(nums []int) (ans int) {
+	sum := 0
+	for _, num := range nums {
+		if num == 1 {
+			sum++
+			ans = max(ans, sum)
+		} else {
+			sum = 0
+		}
+	}
+
+	return
+}
