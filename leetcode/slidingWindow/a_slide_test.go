@@ -2,6 +2,29 @@ package slidingWindow
 
 import "testing"
 
+// 1423. 可获得的最大点数
+func Test_maxScore(t *testing.T) {
+	type args struct {
+		cardPoints []int
+		k          int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "maxScore", args: args{cardPoints: []int{1, 2, 3, 4, 5, 6, 1}, k: 3}, wantAns: 12},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := maxScoreWithOptimize(tt.args.cardPoints, tt.args.k); gotAns != tt.wantAns {
+				//if gotAns := maxScore(tt.args.cardPoints, tt.args.k); gotAns != tt.wantAns {
+				t.Errorf("maxScore() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 2379. 得到 K 个黑块的最少涂色次数
 func Test_minimumRecolors(t *testing.T) {
 	type args struct {
