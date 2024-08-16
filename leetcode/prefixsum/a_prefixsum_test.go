@@ -6,6 +6,30 @@ import (
 	"testing"
 )
 
+// 1004. 最大连续1的个数 III
+func Test_longestOnes(t *testing.T) {
+	type args struct {
+		nums []int
+		k    int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "longest ones", args: args{nums: []int{1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0}, k: 2}, wantAns: 6},
+		{name: "longest ones", args: args{nums: []int{0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1}, k: 3}, wantAns: 10},
+		{name: "longest ones", args: args{nums: []int{0, 0, 0, 1}, k: 4}, wantAns: 4},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := longestOnes(tt.args.nums, tt.args.k); gotAns != tt.wantAns {
+				t.Errorf("longestOnes() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 3152. 特殊数组 II
 func Test_isArraySpecial(t *testing.T) {
 	type args struct {
