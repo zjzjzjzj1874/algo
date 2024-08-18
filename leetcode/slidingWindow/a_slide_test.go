@@ -2,6 +2,29 @@ package slidingWindow
 
 import "testing"
 
+// 424. 替换后的最长重复字符
+func Test_characterReplacement(t *testing.T) {
+	type args struct {
+		s string
+		k int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "character", args: args{s: "AABABBA", k: 2}, want: 5},
+		{name: "character", args: args{s: "AABABA", k: 1}, want: 4},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := characterReplacement(tt.args.s, tt.args.k); got != tt.want {
+				t.Errorf("characterReplacement() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 2024. 考试的最大困扰度
 func Test_maxConsecutiveAnswers(t *testing.T) {
 	type args struct {
