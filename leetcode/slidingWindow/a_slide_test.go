@@ -2,6 +2,28 @@ package slidingWindow
 
 import "testing"
 
+// 2024. 考试的最大困扰度
+func Test_maxConsecutiveAnswers(t *testing.T) {
+	type args struct {
+		answerKey string
+		k         int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "maxConsecutiveAnswers", args: args{answerKey: "TTFTTFTT", k: 1}, want: 5},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := maxConsecutiveAnswers(tt.args.answerKey, tt.args.k); got != tt.want {
+				t.Errorf("maxConsecutiveAnswers() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 1759. 统计同质子字符串的数目
 func Test_countHomogenous(t *testing.T) {
 	type args struct {
