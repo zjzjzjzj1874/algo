@@ -6,6 +6,30 @@ import (
 	"testing"
 )
 
+// 724. 寻找数组的中心下标
+func Test_pivotIndex(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "pivot", args: args{nums: []int{1, 7, 3, 6, 5, 6}}, want: 3},
+		{name: "pivot", args: args{nums: []int{2, 1, -1}}, want: 0},
+		{name: "pivot", args: args{nums: []int{1, 2, 3}}, want: -1},
+		{name: "pivot", args: args{nums: []int{1, -1, 3}}, want: 2},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := pivotIndex(tt.args.nums); got != tt.want {
+				t.Errorf("pivotIndex() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 485. 最大连续 1 的个数
 func Test_findMaxConsecutiveOnes(t *testing.T) {
 	type args struct {
