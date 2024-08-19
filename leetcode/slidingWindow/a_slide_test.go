@@ -2,6 +2,28 @@ package slidingWindow
 
 import "testing"
 
+// 1493. 删掉一个元素以后全为 1 的最长子数组
+func Test_longestSubarray(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "longest", args: args{nums: []int{1, 0, 0, 0, 0}}, wantAns: 1},
+		{name: "longest", args: args{nums: []int{0, 1, 1, 1, 0, 1, 1, 0, 1}}, wantAns: 5},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := longestSubarray(tt.args.nums); gotAns != tt.wantAns {
+				t.Errorf("longestSubarray() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 424. 替换后的最长重复字符
 func Test_characterReplacement(t *testing.T) {
 	type args struct {
