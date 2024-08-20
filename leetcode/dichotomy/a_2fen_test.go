@@ -5,6 +5,30 @@ import (
 	"testing"
 )
 
+// 436. 寻找右区间
+func Test_findRightInterval(t *testing.T) {
+	type args struct {
+		intervals [][]int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns []int
+	}{
+		//[3,4],[2,3],[1,2]
+		{name: "findRightInterval", args: args{intervals: [][]int{{3, 4}, {2, 3}, {1, 2}}}, wantAns: []int{-1, 0, 1}},
+		//[1,2],[2,3],[0,1],[3,4]
+		{name: "findRightInterval", args: args{intervals: [][]int{{1, 2}, {2, 3}, {0, 1}, {3, 4}}}, wantAns: []int{1, 3, 0, -1}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := findRightInterval(tt.args.intervals); !reflect.DeepEqual(gotAns, tt.wantAns) {
+				t.Errorf("findRightInterval() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 69. x 的平方根
 func Test_mySqrt(t *testing.T) {
 	type args struct {
