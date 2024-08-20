@@ -1,6 +1,8 @@
 package dichotomy
 
-import "math"
+import (
+	"math"
+)
 
 // 436. 寻找右区间
 // 给你一个区间数组 intervals ，其中 intervals[i] = [starti, endi] ，且每个 starti 都 不同 。
