@@ -30,6 +30,7 @@ func maxWidthRamp(nums []int) int {
 	stack := make([]int, 0, n)
 
 	for i := range nums {
+		// 这里的单调栈，维护的是从大到小的元素角标
 		if len(stack) == 0 || nums[stack[len(stack)-1]] > nums[i] {
 			stack = append(stack, i)
 		}
@@ -38,18 +39,10 @@ func maxWidthRamp(nums []int) int {
 	ans := 0
 	for i := n - 1; i >= 0; i-- {
 		for len(stack) > 0 && nums[stack[len(stack)-1]] <= nums[i] {
-			ans = returnMax(ans, i-stack[len(stack)-1])
+			ans = max(ans, i-stack[len(stack)-1])
 			stack = stack[:len(stack)-1]
 		}
 	}
 
 	return ans
-}
-
-func returnMax(a, b int) int {
-	if a > b {
-		return a
-	}
-
-	return b
 }
