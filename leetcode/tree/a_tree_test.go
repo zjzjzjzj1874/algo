@@ -7,6 +7,32 @@ import (
 	"testing"
 )
 
+// 2476. 二叉搜索树最近节点查询
+func Test_closestNodes(t *testing.T) {
+	type args struct {
+		root    *TreeNode
+		queries []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want [][]int
+	}{
+		{name: "closestNodes", args: args{
+			root: &TreeNode{Val: 4,
+				Right: &TreeNode{Val: 9}},
+			queries: []int{3},
+		}, want: [][]int{{-1, 4}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := closestNodes(tt.args.root, tt.args.queries); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("closestNodes() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // LCR 050. 路径总和 III
 func Test_pathSum(t *testing.T) {
 	type args struct {
