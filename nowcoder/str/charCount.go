@@ -32,7 +32,8 @@ import (
 // 复制
 // 输出：
 // 2
-func main() {
+func charCount() {
+	//func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	ans := 0
 	scanner.Scan()
