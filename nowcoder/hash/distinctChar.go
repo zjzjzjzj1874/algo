@@ -27,7 +27,8 @@ import "fmt"
 // 复制
 // 输出：
 // 1
-func main() {
+func distinctChar() {
+	//func main() {
 	str := ""
 	fmt.Scan(&str)
 
