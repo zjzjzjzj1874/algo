@@ -29,7 +29,8 @@ import "fmt"
 //说明：
 //可以表示出0，1，2，3，4五种重量。
 
-func main() {
+func weight() {
+	//func main() {
 	n := 0
 	fmt.Scan(&n)
 	m := make([]int, n)
