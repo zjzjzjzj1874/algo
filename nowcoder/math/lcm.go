@@ -26,7 +26,8 @@ import "fmt"
 // 复制
 // 输出：
 // 4
-func main() {
+func lcm() {
+	//func main() {
 	a := 0
 	b := 0
 	_, _ = fmt.Scan(&a, &b)
