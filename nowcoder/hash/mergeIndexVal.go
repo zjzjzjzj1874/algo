@@ -39,7 +39,8 @@ import (
 // 输出：
 // 0 3
 // 8 9
-func main() {
+func mergeIndexVal() {
+	//func main() {
 	var n int
 	fmt.Scan(&n)
 
