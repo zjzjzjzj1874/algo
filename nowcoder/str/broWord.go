@@ -35,7 +35,8 @@ import (
 // 说明：
 // abc的兄弟单词有cab cba bca，所以输出3
 // 经字典序排列后，变为bca cab cba，所以第1个字典序兄弟单词为bca
-func main() {
+func broWord() {
+	//func main() {
 	n := 0
 	fmt.Scan(&n)
 
