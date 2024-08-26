@@ -2,6 +2,52 @@ package hwod
 
 import "testing"
 
+// 任务混部
+func Test_serverNum(t *testing.T) {
+	type args struct {
+		taskNum int
+		task    [][]int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		// [[1,3,3],[2,4,1],[4,7,1],[5,6,2]]
+		{name: "serverNum", args: args{taskNum: 4, task: [][]int{{1, 3, 3}, {2, 4, 1}, {4, 7, 1}, {5, 6, 2}}}, wantAns: 4},
+		{name: "serverNum", args: args{taskNum: 4, task: [][]int{{1, 3, 2}, {2, 5, 3}, {4, 6, 4}}}, wantAns: 7},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := serverNum(tt.args.taskNum, tt.args.task); gotAns != tt.wantAns {
+				t.Errorf("serverNum() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
+// 单词倒叙
+func Test_reverse(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{name: "reverse", args: args{s: "the sky is blue"}, want: "blue is sky the"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := reverseWith2Ptr(tt.args.s); got != tt.want {
+				//if got := reverse(tt.args.s); got != tt.want {
+				t.Errorf("reverse() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 查找重复代码
 func Test_longestCommonSubString(t *testing.T) {
 	type args struct {
