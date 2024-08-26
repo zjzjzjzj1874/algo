@@ -2,6 +2,30 @@ package hwod
 
 import "testing"
 
+// 日志采集系统
+func Test_reportLog(t *testing.T) {
+	type args struct {
+		logs []int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "report", args: args{logs: []int{3, 4, 0, 5, 2, 6, 12, 32}}, wantAns: 4},
+		{name: "report", args: args{logs: []int{3, 4, 5, 6, 7, 8, 9, 10}}, wantAns: 4},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			ans1 := reportLog(tt.args.logs)
+			ans2 := reportLogWithGPT(tt.args.logs)
+			if ans1 != ans2 {
+				t.Errorf("reportLog() = %v, want %v", ans1, ans2)
+			}
+		})
+	}
+}
+
 // 获得完美走位
 func Test_perfectStep(t *testing.T) {
 	type args struct {
