@@ -61,7 +61,8 @@ func random() {
 	}
 }
 
-func main() {
+func random1() {
+	//func main() {
 	n := 0
 	num := 0
 	_, _ = fmt.Scan(&n)
