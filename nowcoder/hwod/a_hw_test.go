@@ -2,6 +2,27 @@ package hwod
 
 import "testing"
 
+// 获得完美走位
+func Test_perfectStep(t *testing.T) {
+	type args struct {
+		step string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "perfect", args: args{step: "ASDA"}, wantAns: 1},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := perfectStep(tt.args.step); gotAns != tt.wantAns {
+				t.Errorf("perfectStep() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // 任务混部
 func Test_serverNum(t *testing.T) {
 	type args struct {
