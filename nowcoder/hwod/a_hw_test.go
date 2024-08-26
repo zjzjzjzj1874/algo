@@ -2,6 +2,52 @@ package hwod
 
 import "testing"
 
+// 找出通过车辆最多颜色
+func Test_maxColor(t *testing.T) {
+	type args struct {
+		n    int
+		cars []int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "maxColor", args: args{n: 3, cars: []int{0, 1, 2, 1}}, wantAns: 2},
+		{name: "maxColor", args: args{n: 2, cars: []int{0, 1, 2, 1}}, wantAns: 1},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := maxColor(tt.args.n, tt.args.cars); gotAns != tt.wantAns {
+				t.Errorf("maxColor() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
+// 工作安排
+func Test_maxProfit(t *testing.T) {
+	type args struct {
+		T     int
+		tasks [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "workArrange", args: args{T: 10, tasks: [][]int{{5, 10}, {4, 40}, {6, 30}, {3, 50}}}, want: 90},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := maxProfitV1(tt.args.T, tt.args.tasks); got != tt.want {
+				//if got := maxProfitWithDP(tt.args.T, tt.args.tasks); got != tt.want {
+				t.Errorf("maxProfit() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 日志采集系统
 func Test_reportLog(t *testing.T) {
 	type args struct {
