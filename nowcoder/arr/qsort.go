@@ -8,10 +8,11 @@ import (
 	"strings"
 )
 
-// 堆排的实现 --> 堆排不稳定，不是该题的解决方案
+// 快排实现 --> 快排不稳定，不是该题的解决方案
 // HJ68 成绩排序
 
-func main() {
+func qsort() {
+	//func main() {
 	n := 0    // 数量
 	sort := 0 // 排序
 	fmt.Scan(&n)
