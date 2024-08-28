@@ -1,6 +1,117 @@
 package hwod
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
+
+// 最多等和不相交连续子序列
+func Test_maxConSeq(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "maxConSeq", args: args{nums: []int{-1, 0, 4, -3, 6, 5, -6, 5, -7, -3}}, wantAns: 3},
+		{name: "maxConSeq", args: args{nums: []int{8, 9, 1, 9, 6, 3, 9, 1, 0}}, wantAns: 4},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := maxConSeq(tt.args.nums); gotAns != tt.wantAns {
+				t.Errorf("maxConSeq() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
+// 租车骑绿道
+func Test_minBikeNum(t *testing.T) {
+	type args struct {
+		m      int
+		n      int
+		weight []int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "minBikeNum", args: args{m: 3, n: 4, weight: []int{3, 2, 2, 1}}, wantAns: 3},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := minBikeNum(tt.args.m, tt.args.n, tt.args.weight); gotAns != tt.wantAns {
+				t.Errorf("minBikeNum() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
+// 双十一
+func Test_maxValue(t *testing.T) {
+	type args struct {
+		prices []int
+		money  int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "maxValue", args: args{prices: []int{23, 26, 36, 27}, money: 78}, wantAns: 76},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := maxValue(tt.args.prices, tt.args.money); gotAns != tt.wantAns {
+				t.Errorf("maxValue() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
+// 整理扑克牌
+func Test_sortPoker(t *testing.T) {
+	type args struct {
+		poker string
+	}
+	tests := []struct {
+		name string
+		args args
+	}{
+		{name: "sortPoker", args: args{poker: "1 3 3 3 2 1 5"}},
+		{name: "sortPoker", args: args{poker: "4 4 2 1 2 1 3 3 3 4"}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			sortPoker(tt.args.poker)
+		})
+	}
+}
+
+// 找数字
+func Test_findNum(t *testing.T) {
+	type args struct {
+		nums [][]int
+	}
+	tests := []struct {
+		name       string
+		args       args
+		wantTarget [][]int
+	}{
+		{name: "findNum", args: args{nums: [][]int{{0, 3, 5, 4, 2}, {2, 5, 7, 8, 3}, {2, 5, 4, 2, 4}}},
+			wantTarget: [][]int{{-1, 4, 2, 3, 3}, {1, 1, -1, -1, 4}, {1, 1, 2, 3, 2}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotTarget := findNum(tt.args.nums); !reflect.DeepEqual(gotTarget, tt.wantTarget) {
+				t.Errorf("findNum() = %v, want %v", gotTarget, tt.wantTarget)
+			}
+		})
+	}
+}
 
 // 找出通过车辆最多颜色
 func Test_maxColor(t *testing.T) {
