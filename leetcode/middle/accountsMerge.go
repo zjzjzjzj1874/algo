@@ -31,6 +31,141 @@ import "sort"
 // accounts[i][j] (for j > 0) 是有效的邮箱地址
 
 // 解题：暴力解法，并查集
+func accountsMergeWithLT(accounts [][]string) (ans [][]string) {
+	emailToIndex := map[string]int{}
+	emailToName := map[string]string{}
+	for _, account := range accounts {
+		name := account[0]
+		for _, email := range account[1:] {
+			if _, has := emailToIndex[email]; !has {
+				emailToIndex[email] = len(emailToIndex)
+				emailToName[email] = name
+			}
+		}
+	}
+
+	parent := make([]int, len(emailToIndex))
+	for i := range parent {
+		parent[i] = i
+	}
+	var find func(int) int
+	find = func(x int) int {
+		if parent[x] != x {
+			parent[x] = find(parent[x])
+		}
+		return parent[x]
+	}
+	union := func(from, to int) {
+		parent[find(from)] = find(to)
+	}
+
+	for _, account := range accounts {
+		firstIndex := emailToIndex[account[1]]
+		for _, email := range account[2:] {
+			union(emailToIndex[email], firstIndex)
+		}
+	}
+
+	indexToEmails := map[int][]string{}
+	for email, index := range emailToIndex {
+		index = find(index)
+		indexToEmails[index] = append(indexToEmails[index], email)
+	}
+
+	for _, emails := range indexToEmails {
+		sort.Strings(emails)
+		account := append([]string{emailToName[emails[0]]}, emails...)
+		ans = append(ans, account)
+	}
+	return
+}
+
+func accountsMergeWithMe(accounts [][]string) (ans [][]string) {
+	m := make(map[string][][]string) // map[name][]account   account = []string
+
+	for _, account := range accounts {
+		// 如果存在这个名字的用户，看看邮箱，到底属于谁
+		lists, ok := m[account[0]]
+		if !ok {
+			// 这个名字的用户还不存在，
+			// 对email去重
+			emails := make([]string, 0, len(account))
+			emails = append(emails, account[0])
+			em := make(map[string]struct{})
+			for i := 1; i < len(account); i++ {
+				em[account[i]] = struct{}{}
+			}
+			for email := range em {
+				emails = append(emails, email)
+			}
+			m[account[0]] = [][]string{emails}
+			continue
+		}
+
+		needNew := true // 不重名，就需要新增account
+
+		// 已经存在同名用户，确认是否需要合并邮箱
+		for i := range lists {
+			needMerge := false
+			existMap := make(map[string]struct{})
+			for j := 1; j < len(lists[i]); j++ {
+				existMap[lists[i][j]] = struct{}{}
+			}
+
+			for k := 1; k < len(account); k++ {
+				if _, ok := existMap[account[k]]; ok {
+					// 有重复的邮箱，需要merge
+					needMerge = true
+					needNew = false
+					break
+				}
+			}
+			if !needMerge {
+				continue
+			}
+			for k := 1; k < len(account); k++ {
+				existMap[account[k]] = struct{}{}
+				if _, ok := existMap[account[k]]; !ok {
+					lists[i] = append(lists[i], account[k])
+				}
+			}
+
+			nac := make([]string, len(existMap)+1)
+			nac[0] = account[0]
+			idx := 1
+			for email := range existMap {
+				nac[idx] = email
+				idx++
+			}
+			lists[i] = nac
+		}
+		if needNew {
+			depAc := make([]string, 0, len(account))
+			depAc = append(depAc, account[0])
+			em := make(map[string]struct{})
+			for i := 1; i < len(account); i++ {
+				em[account[i]] = struct{}{}
+			}
+			for email := range em {
+				depAc = append(depAc, email)
+			}
+
+			lists = append(lists, depAc)
+		}
+
+		m[account[0]] = lists
+	}
+
+	for _, ac := range m {
+		for i := range ac {
+			sort.Strings(ac[i][1:])
+			ans = append(ans, ac[i])
+		}
+	}
+
+	return
+}
+
 func accountsMerge(accounts [][]string) [][]string {
 	aMap := make(map[string][][]string) // map[Name][][]string
 

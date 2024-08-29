@@ -677,34 +677,80 @@ func Test_accountsMerge(t *testing.T) {
 			},
 		},
 		{
-			//[["Alex","Alex5@m.co","Alex4@m.co","Alex0@m.co"],
-			//["Ethan","Ethan3@m.co","Ethan3@m.co","Ethan0@m.co"],
-			//["Kevin","Kevin4@m.co","Kevin2@m.co","Kevin2@m.co"],
-			//["Gabe","Gabe0@m.co","Gabe3@m.co","Gabe2@m.co"],
-			//["Gabe","Gabe3@m.co","Gabe4@m.co","Gabe2@m.co"]]
 			name: "accounts", args: args{
 				accounts: [][]string{
-					{"Alex", "Alex5@m.co", "Alex4@m.co", "Alex0@m.co"},
+					//{"Alex", "Alex5@m.co", "Alex4@m.co", "Alex0@m.co"},
 					{"Ethan", "Ethan3@m.co", "Ethan3@m.co", "Ethan0@m.co"},
 					{"Kevin", "Kevin4@m.co", "Kevin2@m.co", "Kevin2@m.co"},
 					{"Gabe", "Gabe0@m.co", "Gabe3@m.co", "Gabe2@m.co"},
 					{"Gabe", "Gabe3@m.co", "Gabe4@m.co", "Gabe2@m.co"},
+					{"Gabe", "Gabe@m.co"},
 				}},
-			//[["Alex","Alex0@m.co","Alex4@m.co","Alex5@m.co"],
-			//["Ethan","Ethan0@m.co","Ethan3@m.co"],
-			//["Gabe","Gabe0@m.co","Gabe2@m.co","Gabe3@m.co","Gabe4@m.co"],
-			//["Kevin","Kevin2@m.co","Kevin4@m.co"]]...
 			want: [][]string{
-				{"Alex", "Alex0@m.co", "Alex4@m.co", "Alex5@m.co"},
+				//{"Alex", "Alex0@m.co", "Alex4@m.co", "Alex5@m.co"},
 				{"Ethan", "Ethan0@m.co", "Ethan3@m.co"},
-				{"Gabe", "Gabe0@m.co", "Gabe2@m.co", "Gabe3@m.co", "Gabe4@m.co"},
 				{"Kevin", "Kevin2@m.co", "Kevin4@m.co"},
+				{"Gabe", "Gabe0@m.co", "Gabe2@m.co", "Gabe3@m.co", "Gabe4@m.co"},
+				{"Gabe", "Gabe@m.co"},
+			},
+		},
+		{
+			//[["Kevin","Kevin1@m.co","Kevin5@m.co","Kevin2@m.co"],
+			//["Bob","Bob3@m.co","Bob1@m.co","Bob2@m.co"],
+			//["Lily","Lily3@m.co","Lily2@m.co","Lily0@m.co"],
+			//["Gabe","Gabe2@m.co","Gabe0@m.co","Gabe2@m.co"],
+			//["Kevin","Kevin4@m.co","Kevin3@m.co","Kevin3@m.co"]]
+			// want
+			//[["Lily","Lily0@m.co","Lily2@m.co","Lily3@m.co"],
+			//["Gabe","Gabe0@m.co","Gabe2@m.co"],
+			//["Kevin","Kevin1@m.co","Kevin2@m.co","Kevin5@m.co"],
+			//["Kevin","Kevin3@m.co","Kevin4@m.co"],
+			//["Bob","Bob1@m.co","Bob2@m.co","Bob3@m.co"]]
+			name: "accounts", args: args{
+				accounts: [][]string{
+					//{"Lily", "Lily3@m.co", "Lily2@m.co", "Lily0@m.co"},
+					{"Kevin", "Kevin1@m.co", "Kevin5@m.co", "Kevin2@m.co"},
+					//{"Gabe", "Gabe2@m.co", "Gabe0@m.co", "Gabe2@m.co"},
+					{"Kevin", "Kevin4@m.co", "Kevin3@m.co", "Kevin3@m.co"},
+					//{"Bob", "Bob3@m.co", "Bob1@m.co", "Bob2@m.co"},
+				}},
+			want: [][]string{
+				//{"Lily", "Lily0@m.co", "Lily2@m.co", "Lily3@m.co"},
+				{"Kevin", "Kevin1@m.co", "Kevin2@m.co", "Kevin5@m.co"},
+				//{"Gabe", "Gabe0@m.co", "Gabe2@m.co"},
+				{"Kevin", "Kevin3@m.co", "Kevin4@m.co"},
+				//{"Bob", "Bob1@m.co", "Bob2@m.co", "Bob3@m.co"},
+			},
+		},
+		{
+			//[["David","David0@m.co","David1@m.co"],
+			//["David","David3@m.co","David4@m.co"],
+			//["David","David4@m.co","David5@m.co"],
+			//["David","David2@m.co","David3@m.co"],
+			//["David","David1@m.co","David2@m.co"]]
+			// want
+			//["David","David0@m.co","David1@m.co","David2@m.co","David3@m.co","David4@m.co","David5@m.co"]
+			name: "accounts", args: args{
+				accounts: [][]string{
+					//{"Lily", "Lily3@m.co", "Lily2@m.co", "Lily0@m.co"},
+					{"Kevin", "Kevin1@m.co", "Kevin5@m.co", "Kevin2@m.co"},
+					//{"Gabe", "Gabe2@m.co", "Gabe0@m.co", "Gabe2@m.co"},
+					{"Kevin", "Kevin4@m.co", "Kevin3@m.co", "Kevin3@m.co"},
+					//{"Bob", "Bob3@m.co", "Bob1@m.co", "Bob2@m.co"},
+				}},
+			want: [][]string{
+				//{"Lily", "Lily0@m.co", "Lily2@m.co", "Lily3@m.co"},
+				{"Kevin", "Kevin1@m.co", "Kevin2@m.co", "Kevin5@m.co"},
+				//{"Gabe", "Gabe0@m.co", "Gabe2@m.co"},
+				{"Kevin", "Kevin3@m.co", "Kevin4@m.co"},
+				//{"Bob", "Bob1@m.co", "Bob2@m.co", "Bob3@m.co"},
 			},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := accountsMerge(tt.args.accounts); !reflect.DeepEqual(got, tt.want) {
+			if got := accountsMergeWithMe(tt.args.accounts); !reflect.DeepEqual(got, tt.want) {
+				//if got := accountsMerge(tt.args.accounts); !reflect.DeepEqual(got, tt.want) {
 				fmt.Println("want:", tt.want)
 				fmt.Println("got:", got)
 				t.Errorf("accountsMerge() = %v, want %v", got, tt.want)
