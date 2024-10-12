@@ -57,13 +57,15 @@ func duplicateNumbersXORWithArr(nums []int) (ans int) {
 
 // 位运算
 func duplicateNumbersXORWithBitOp(nums []int) (ans int) {
-	t := 0
-	for i := range nums {
-		tt := t >> nums[i]
-		if tt&1 > 0 { // 已经出现过
-			ans ^= nums[i]
+	// 终极位运算
+	bit := 0
+	for _, num := range nums {
+		// bit右移num位，如果出现过，那么和1取&一定==1，否则==0
+		if bit>>num&1 > 0 {
+			ans ^= num
 		} else {
-			t |= 1 << nums[i]
+			// 没出现过，把数左移num位
+			bit |= 1 << num
 		}
 	}
 
