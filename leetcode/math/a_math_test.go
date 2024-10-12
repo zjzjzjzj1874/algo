@@ -1,6 +1,51 @@
 package math
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
+
+// 1952. 三除数
+func Test_isThree(t *testing.T) {
+	type args struct {
+		n int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "isThree", args: args{n: 9}, want: true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isThree(tt.args.n); got != tt.want {
+				t.Errorf("isThree() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 2553. 分割数组中数字的数位
+func Test_separateDigits(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns []int
+	}{
+		{name: "separateDigits", args: args{nums: []int{100, 40}}, wantAns: []int{1, 0, 0, 4, 0}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := separateDigits(tt.args.nums); !reflect.DeepEqual(gotAns, tt.wantAns) {
+				t.Errorf("separateDigits() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
 
 // 2521. 数组乘积中的不同质因数数目
 func Test_distinctPrimeFactors(t *testing.T) {

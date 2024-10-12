@@ -5,6 +5,31 @@ import (
 	"testing"
 )
 
+// 3158. 求出出现两次数字的 XOR 值
+func Test_duplicateNumbersXOR(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantAns int
+	}{
+		{name: "xor", args: args{nums: []int{50, 40, 50}}, wantAns: 50},
+		{name: "xor", args: args{nums: []int{1, 2, 3}}, wantAns: 0},
+		{name: "xor", args: args{nums: []int{1, 2, 1, 3}}, wantAns: 1},
+		{name: "xor", args: args{nums: []int{1, 2, 2, 1, 3, 3}}, wantAns: 1},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotAns := duplicateNumbersXORWithBitOp(tt.args.nums); gotAns != tt.wantAns {
+				//if gotAns := duplicateNumbersXOR(tt.args.nums); gotAns != tt.wantAns {
+				t.Errorf("duplicateNumbersXOR() = %v, want %v", gotAns, tt.wantAns)
+			}
+		})
+	}
+}
+
 // LCR 005. 最大单词长度乘积
 func Test_maxProduct(t *testing.T) {
 	type args struct {
