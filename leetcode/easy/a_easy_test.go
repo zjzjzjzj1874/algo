@@ -7,6 +7,28 @@ import (
 	"testing"
 )
 
+// LCP 72. 补给马车
+func Test_supplyWagon(t *testing.T) {
+	type args struct {
+		supplies []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{name: "supply", args: args{supplies: []int{7, 3, 6, 1, 8}}, want: []int{10, 15}},
+		{name: "supply", args: args{supplies: []int{6, 2, 2, 6, 9, 8, 5, 7}}, want: []int{10, 15, 8, 12}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := supplyWagonWithOptimize(tt.args.supplies); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("supplyWagon() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 605. 种花问题
 func Test_canPlaceFlowers(t *testing.T) {
 	type args struct {
