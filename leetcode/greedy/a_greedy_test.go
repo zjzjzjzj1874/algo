@@ -2,6 +2,29 @@ package greedy
 
 import "testing"
 
+// 910. 最小差值 II
+func Test_smallestRangeII(t *testing.T) {
+	type args struct {
+		nums []int
+		k    int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{name: "smallest range", args: args{nums: []int{0, 10}, k: 2}, want: 6},
+		{name: "smallest range", args: args{nums: []int{1, 3, 6}, k: 3}, want: 2},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := smallestRangeII(tt.args.nums, tt.args.k); got != tt.want {
+				t.Errorf("smallestRangeII() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 // 334. 递增的三元子序列
 func Test_increasingTriplet(t *testing.T) {
 	type args struct {
