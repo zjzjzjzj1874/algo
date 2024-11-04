@@ -22,11 +22,21 @@ int main() {
             cout << i << "\t";
         }
     }
+    cout << endl;
 
     int arr1[] = {2, 13, 17, 11, 23, 29, 31, 19, 3, 5, 7, 37};
     select_sort(arr1, sizeof(arr1));
     cout << "完成选择排序：" << endl;
+    for (int num : arr1) {
+        cout << num << "\t";
+    }
+    cout << endl;
+
     int arr2[] = {2, 13, 17, 11, 23, 29, 31, 19, 3, 5, 7, 37};
     bubble_sort(arr2, sizeof(arr2));
     cout << "完成冒泡排序：" << endl;
+    for (int num : arr2) {
+        cout << num << "\t";
+    }
+    cout << endl;
 }
