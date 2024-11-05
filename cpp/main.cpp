@@ -3,8 +3,10 @@
 //
 
 #include <iostream>
+#include <vector>
 #include "math/prime.h"
 #include "sort/sort.h"
+#include "reverse.h"
 
 using namespace std;
 
@@ -12,6 +14,14 @@ using namespace std;
  * cpp算法的入口
  */
 int main() {
+    vector<char> c = {'h','e','l','l','e','o','u','i'};
+    reverseString(c);
+    for (char t : c) {
+        cout << t << "\t";
+    }
+    cout << endl;
+
+
     // 质数
     prime();
 
