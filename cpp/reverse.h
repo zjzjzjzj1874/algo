@@ -11,5 +11,6 @@ using namespace std;
 
 // 翻转字符串
 void reverseString(vector<char>& s);
+void reverseString2ptr(vector<char>& s); // 使用双指针翻转
 
 #endif //REVERSE_H

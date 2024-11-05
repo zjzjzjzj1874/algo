@@ -14,3 +14,14 @@ void reverseString(vector<char>& c) {
         c[c.size() - 1-i] = t;
     }
 }
+
+void reverseString2ptr(vector<char>& c) {
+    int head = 0, tail = c.size()-1;
+    while (head < tail) {
+        char t = c[head];
+        c[head] = c[tail];
+        c[tail] = t;
+        ++head;
+        --tail;
+    }
+}

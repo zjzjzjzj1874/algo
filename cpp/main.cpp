@@ -15,7 +15,7 @@ using namespace std;
  */
 int main() {
     vector<char> c = {'h','e','l','l','e','o','u','i'};
-    reverseString(c);
+    reverseString2ptr(c);
     for (char t : c) {
         cout << t << "\t";
     }
