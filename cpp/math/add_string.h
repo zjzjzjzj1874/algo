@@ -24,6 +24,7 @@
 // num1 和num2 都只包含数字 0-9
 // num1 和num2 都不包含任何前导零
 std::string add_string (std::string& s1, std::string& s2);
+std::string add_string_optimize (std::string& s1, std::string& s2);
 
 
 #endif //ADD_STRING_H

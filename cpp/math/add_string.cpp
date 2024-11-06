@@ -66,3 +66,32 @@ std::string add_string (std::string& s1, std::string& s2){
 
     return std::string(vc.begin(), vc.end());
 }
+
+// 优化一下
+std::string add_string_optimize (std::string& s1, std::string& s2){
+    int n1 = s1.size(), n2 = s2.size();
+    int n = std::max(n1, n2); // n表示较长的数据；
+
+    // 定义一个vector的char
+    std::vector<char> vc(n+1);
+
+    int carry = 0; // 是否需要进位
+    for (int i = 0; i < n; i++) {
+        if (i < n1) {
+            carry += s1[n1-i-1]-'0';
+        }
+        if (i < n2) {
+            carry += s2[n2-i-1]-'0';
+        }
+        carry >= 10 ? (vc[n-i] = carry%10+'0') : (vc[n-i] = carry+'0');
+        carry /= 10;
+    }
+
+    if (carry > 0) {
+        vc[0] = carry+'0';
+    } else {
+        vc.erase(vc.begin()); // 删除首个元素
+    }
+
+    return std::string(vc.begin(), vc.end());
+}

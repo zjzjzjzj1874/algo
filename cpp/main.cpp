@@ -18,7 +18,7 @@ using namespace std;
 int main() {
     // string num1 = "123", num2 = "11";
     string num1 = "56", num2 = "77";
-    string sum = add_string(num1, num2);
+    string sum = add_string_optimize(num1, num2);
     cout << num1 << "+" << num2 << "=" << sum << endl;
 
     const vector<vector<int>>& ms = {

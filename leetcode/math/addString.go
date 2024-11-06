@@ -47,6 +47,7 @@ func addStrings(num1 string, num2 string) string {
 	return string(ans)
 }
 
+// 这里也可以不用map，0-9byte的ASCII和int对应的值，只需要'1'-'0'便可以得出数值。
 var numByte = map[byte]int{
 	'0': 0,
 	'1': 1,
