@@ -19,10 +19,8 @@ package math
 func addStrings(num1 string, num2 string) string {
 	n1 := len(num1)
 	n2 := len(num2)
-	n := n1
-	if n2 > n1 {
-		n = n2
-	}
+	n := max(n1, n2)
+
 	ans := make([]byte, n+1)
 	shift := 0
 	for i := 0; i < n; i++ {
