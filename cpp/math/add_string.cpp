@@ -95,3 +95,25 @@ std::string add_string_optimize (std::string& s1, std::string& s2){
 
     return std::string(vc.begin(), vc.end());
 }
+
+// 优化一下
+std::string add_string_without_vector (std::string& s1, std::string& s2){
+    int p1 = s1.size(), p2 = s2.size();
+
+    std::string result;
+    int carry = 0; // 是否需要进位
+    while (p1 > 0 || p2 > 0) {
+        int n1 = (p1>0) ? s1[p1-1]-'0':0;
+        int n2 = (p2>0) ? s2[p2-1]-'0':0;
+
+        carry += n1 + n2;
+        result = char(carry%10+'0') + result;
+        carry /= 10;
+
+        p1--;
+        p2--;
+    }
+    result = (carry>0)?char(carry+'0')+result:result;
+
+    return result;
+}

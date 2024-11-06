@@ -16,9 +16,10 @@ using namespace std;
  * cpp算法的入口
  */
 int main() {
-    // string num1 = "123", num2 = "11";
-    string num1 = "56", num2 = "77";
-    string sum = add_string_optimize(num1, num2);
+    string num1 = "123", num2 = "11";
+    // string num1 = "56", num2 = "77";
+    string sum = add_string_without_vector(num1, num2);
+    // string sum = add_string_optimize(num1, num2);
     cout << num1 << "+" << num2 << "=" << sum << endl;
 
     const vector<vector<int>>& ms = {
