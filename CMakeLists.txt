@@ -9,4 +9,5 @@ add_executable(algo
         cpp/math/add_string.cpp
         cpp/sort/sort.cpp
         cpp/reverse.cpp
+        cpp/math/rotate_image.cpp
     cpp/main.cpp)
