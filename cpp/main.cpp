@@ -12,14 +12,17 @@
 #include "reverse.h"
 
 using namespace std;
-//
-// // 函数声明
-// void rotate_image(int** arr, int n);
+
+// 函数声明:反转链表
+void reverseListNode();
 
 /*
  * cpp算法的入口
  */
 int main() {
+    // 反转链表
+    reverseListNode();
+
     int n = 3; // 数组的大小
 
     // 动态分配二维数组
@@ -108,24 +111,29 @@ int main() {
     cout << endl;
 }
 
-// 旋转图像的函数定义
-// void rotate_image(int** arr, int n) {
-//     // 进行 90 度顺时针旋转
-//     for (int layer = 0; layer < n / 2; ++layer) {
-//         int first = layer;
-//         int last = n - layer - 1;
-//         for (int i = first; i < last; ++i) {
-//             int offset = i - first;
-//             // 保存顶部
-//             int top = arr[first][i];
-//             // 左到顶
-//             arr[first][i] = arr[last - offset][first];
-//             // 底到左
-//             arr[last - offset][first] = arr[last][last - offset];
-//             // 右到底
-//             arr[last][last - offset] = arr[i][last];
-//             // 顶到右
-//             arr[i][last] = top;
-//         }
-//     }
-// }
+void reverseListNode() {
+    ListNode node5 = ListNode(5);
+    ListNode node4 = ListNode(4, &node5);
+    ListNode node3 = ListNode(3, &node4);
+    ListNode node2 = ListNode(2, &node3);
+    ListNode node1 = ListNode(1, &node2);
+
+    ListNode* cur = &node1;
+    while (cur) {
+        cout << cur->val << "->";
+        cur = cur->next;
+    }
+    cout << "NULL" << endl;
+
+    ListNode* nd = reverseList(&node1);
+    cout << "翻转之后链表：" << endl;
+    while (nd) {
+        cout << nd->val << "->";
+        nd = nd->next;
+    }
+    cout << "NULL" << endl;
+}
+
+
+
+

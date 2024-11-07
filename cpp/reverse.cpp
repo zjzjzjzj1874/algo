@@ -25,3 +25,18 @@ void reverseString2ptr(vector<char>& c) {
         --tail;
     }
 }
+
+// 链表翻转
+ListNode* reverseList(ListNode* head) {
+    ListNode* curr = head;
+    ListNode* prev = nullptr;
+
+    while (curr) {
+        ListNode* temp = curr -> next;
+        curr -> next = prev;
+        prev = curr;
+        curr = temp;
+    }
+
+    return prev;
+}
