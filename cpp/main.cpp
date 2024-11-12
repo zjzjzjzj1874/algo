@@ -10,6 +10,7 @@
 #include "math/add_string.h"
 #include "sort/sort.h"
 #include "reverse.h"
+#include "binary_search.h"
 
 using namespace std;
 
@@ -20,6 +21,11 @@ void reverseListNode();
  * cpp算法的入口
  */
 int main() {
+    const int (& bsa)[10] = {2, 3, 5, 7, 9, 10, 13, 15, 19, 23};
+    cout << "查找的元素在：" << search(bsa,0,9,15) << endl;
+    cout << "查找的元素在：" << search(bsa,0,9,10) << endl;
+    cout << "查找的元素在：" << search(bsa,0,9,30) << endl;
+
     // 反转链表
     reverseListNode();
 
