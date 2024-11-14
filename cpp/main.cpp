@@ -25,6 +25,14 @@ int main() {
     cout << "查找的元素在：" << search(bsa,0,9,15) << endl;
     cout << "查找的元素在：" << search(bsa,0,9,10) << endl;
     cout << "查找的元素在：" << search(bsa,0,9,30) << endl;
+    cout << "查找的元素在：" << searchRecursion(bsa,0,9,15) << endl;
+    cout << "查找的元素在：" << searchRecursion(bsa,0,9,10) << endl;
+    cout << "查找的元素在：" << searchRecursion(bsa,0,9,30) << endl;
+    int result = searchRecursion(bsa,0,9,30);
+    result == -1 ?
+        cout << "数组中没找到30！" << endl:
+        cout << "数组中找到了30，下标在：" << result << endl;
+
 
     // 反转链表
     reverseListNode();
@@ -139,7 +147,6 @@ void reverseListNode() {
     }
     cout << "NULL" << endl;
 }
-
 
 
 

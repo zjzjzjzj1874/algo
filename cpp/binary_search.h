@@ -7,6 +7,7 @@
 
 // 有序数组的二分查找,返回数组的下标
 int search(const int(& a)[10],int start, int end, int target);
+int searchRecursion(const int(& a)[10],int start, int end, int target);
 
 class binary_search {
 
