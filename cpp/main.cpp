@@ -17,10 +17,23 @@ using namespace std;
 // 函数声明:反转链表
 void reverseListNode();
 
+// 打印数组
+void printArray(int (&)[10]);
 /*
  * cpp算法的入口
  */
 int main() {
+    { // 快速排序
+        int arr1[] = {2, 13, 17, 11, 23, 29, 31, 19, 3, 5, 7, 37};
+        quick_sort(arr1, sizeof(arr1)/sizeof(arr1[0]));
+        cout << "完成快速排序：" << endl;
+        for (int num : arr1) {
+            cout << num << "\t";
+        }
+        cout << endl;
+    }
+
+
     const int (& bsa)[10] = {2, 3, 5, 7, 9, 10, 13, 15, 19, 23};
     cout << "查找的元素在：" << search(bsa,0,9,15) << endl;
     cout << "查找的元素在：" << search(bsa,0,9,10) << endl;
@@ -109,7 +122,7 @@ int main() {
     cout << endl;
 
     int arr1[] = {2, 13, 17, 11, 23, 29, 31, 19, 3, 5, 7, 37};
-    select_sort(arr1, sizeof(arr1));
+    select_sort(arr1, sizeof(arr1)/sizeof(arr1[0]));
     cout << "完成选择排序：" << endl;
     for (int num : arr1) {
         cout << num << "\t";
@@ -117,7 +130,7 @@ int main() {
     cout << endl;
 
     int arr2[] = {2, 13, 17, 11, 23, 29, 31, 19, 3, 5, 7, 37};
-    bubble_sort(arr2, sizeof(arr2));
+    bubble_sort(arr2, sizeof(arr2)/sizeof(arr2[0]));
     cout << "完成冒泡排序：" << endl;
     for (int num : arr2) {
         cout << num << "\t";
