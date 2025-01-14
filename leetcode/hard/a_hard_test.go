@@ -3,9 +3,40 @@ package hard
 import (
 	"fmt"
 	"math"
+	"math/rand"
 	"reflect"
 	"testing"
+	"time"
 )
+
+// 710. 黑名单中的随机数
+func TestConstructor(t *testing.T) {
+	rand.Seed(time.Now().UnixNano())
+
+	tests := []struct {
+		n         int
+		blacklist []int
+		expected  map[int]struct{}
+	}{
+		// {10, []int{3, 5, 7}, map[int]struct{}{3: {}, 5: {}, 7: {}}},
+		// {1, []int{}, map[int]struct{}{}},
+		// {100, []int{10, 20, 30, 40, 50}, map[int]struct{}{10: {}, 20: {}, 30: {}, 40: {}, 50: {}}},
+		// {10, []int{0, 9}, map[int]struct{}{0: {}, 9: {}}},
+		// {10, []int{8, 9, 10}, map[int]struct{}{8: {}, 9: {}}},
+		// {10, []int{5}, map[int]struct{}{5: {}}},
+		{10, []int{0, 1, 2, 3, 4, 5, 6, 7, 9}, map[int]struct{}{0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}, 9: {}}},
+	}
+
+	for _, test := range tests {
+		solution := Constructor(test.n, test.blacklist)
+		for i := 0; i < 100; i++ {
+			num := solution.Pick()
+			if val, ok := test.expected[num]; ok {
+				t.Errorf("Expected %d to be in blackMap, but it was not", val)
+			}
+		}
+	}
+}
 
 // 41. 缺失的第一个正数
 func Test_firstMissingPositive(t *testing.T) {
